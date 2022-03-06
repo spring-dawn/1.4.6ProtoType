@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax test</title>
+    <style>
+        div, span{ outline: 1px solid red;}
+        .selectBox{
+            width: 80%; height: 400px;
+            margin: auto;
+
+            display: flex;
+        }
+        .super{ width: 30%;}
+        .sub{width: 70%;}
+
+
+    </style>
+</head>
+<body>
+<h3>광역시 선택 후 화면 일부 교체 시도</h3>
+<hr>
+<div class="selectBox">
+    <div class="super">
+        <div id="Korea">전체</div>
+        <div id="Ulsan">울산</div>
+        <div id="Jeju">제주</div>
+    </div>
+    <!-- 체크박스 있는 부분만 form 영역으로 써도 되는 건가? 일단 실험; -->
+    <form action="">
+        <div class="sub">
+            <!-- 서브 시티즈 박스 안이 ajax통신 결과가 출력될 위치 -->
+            <div id="sub_cities"></div>
+        </div>
+    </form>
+</div>
+
+<script>
+        // 버튼은 바로 리스너 달아도 괜찮은가? 일단 예시로 울산 타겟팅.
+        const $Ulsan = document.getElementById('Ulsan');
+        $Ulsan.addEventListener('click', ulsan_f);
+
+        // 대분류에서 울산을 선택하는 경우의 함수.
+        function ulsan_f(e){
+            console.log('이벤트 발생 확인');
+
+            const url = '/map';
+            fetch(url, {method: 'GET'}).then(res => res.json())
+                                       .then(data => {
+                                           const exAll = document.createElement('input');
+                                           exAll.setAttribute('type', 'checkbox');
+                                        //    울산을 전체의 의미로 일단 써본다;
+                                           exAll.textContent = $Ulsan.textContent;
+                                       })
+                                       .then(res => {console.log(res);})
+                                       .catch(err => {console.error('Err:', err)} );
+
+                                       console.log('after fetch');
+        }
+
+    </script>
+</body>
+</html>
