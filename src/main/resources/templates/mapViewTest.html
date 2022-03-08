@@ -5,62 +5,247 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ajax test</title>
-    <style>
-        div, span{ outline: 1px solid red;}
-        .selectBox{
-            width: 80%; height: 400px;
-            margin: auto;
+    <script src="https://kit.fontawesome.com/d4b88f7572.js" crossorigin="anonymous"></script>
 
-            display: flex;
-        }
-        .super{ width: 30%;}
-        .sub{width: 70%;}
+    <!-- css파일을 여러 개 적용할 때 위에서 아래 순서상 늦게 적용된 css의 우선순위가 높다 -->
+    <!-- <link rel="stylesheet" href="map.css"> -->
+    <link rel="stylesheet" href="/css/mapView.css">
 
+    <!-- 구글 폰트 Jua 적용  -->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-    </style>
+    <!-- JS파일 연결 -->
+    <script defer src="/220228 개인작업 시작/220308 map_v3/cityAjax_v3.js"></script>
+    <title>클래스찾기 화면_2차수정_Grid게시판</title>
+
+    <!-- 네이버, 카카오 지도 API  -->
+    <script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=0y3jm6bdzz"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38d6ce372c141979c2b8c65e59778eb3&libraries=services">
+    </script>
 </head>
+
 <body>
-<h3>광역시 선택 후 화면 일부 교체 시도</h3>
-<hr>
-<div class="selectBox">
-    <div class="super">
-        <div id="Korea">전체</div>
-        <div id="Ulsan">울산</div>
-        <div id="Jeju">제주</div>
+<header>
+    <!-- 로고 -->
+    <div class="logo"><img src="/img/logo.jpg" alt="" width="150px" height="100px"></div>
+    <!-- 상단 메뉴 -->
+    <nav>
+        <ul class="menu">
+            <li>분야별 레시피</li>
+            <li>|</li>
+            <li>테마별 레시피</li>
+            <li>|</li>
+            <li>사진 팁</li>
+            <li>|</li>
+            <li>홈베이킹 클래스</li>
+            <li>|</li>
+            <li>Q&A</li>
+            <li>|</li>
+            <li>자유게시판</li>
+        </ul>
+    </nav>
+    <!-- 우측상단 아이콘 -->
+    <div class="icon">
+        <ul class="icon_ul">
+            <li><a href="#" class="searchBtn"><i class="fas fa-search"></i></a></li>
+            <li><i class="far fa-user"></i></li>
+            <li><i class="fas fa-bars"></i></li>
+        </ul>
     </div>
-    <!-- 체크박스 있는 부분만 form 영역으로 써도 되는 건가? 일단 실험; -->
-    <form action="">
-        <div class="sub">
-            <!-- 서브 시티즈 박스 안이 ajax통신 결과가 출력될 위치 -->
-            <div id="sub_cities"></div>
+</header>
+
+<!-- 검색창 -->
+<div class="container_search">
+    <div class="search">
+        <input class="search textbox" type="text">
+        <!-- placeholder="검색어를 입력하세요."> -->
+        <button class="search button">검색</button>
+    </div>
+</div>
+
+<main>
+    <!-- 게시판 -->
+    <div class="content_page">
+        <!-- 게시판 상단 현 페이지 주소 표시, 정렬 콤보박스, 글쓰기 버튼 -->
+        <div id="page_status">
+            <div id="page_name">지역별 클래스 검색</div>
+
+            <!-- order_wrapper = (order + write_btn) -->
+            <div class="order_wrapper">
+                <select name="order" id="post_order">
+                    <option value="">정렬기준</option>
+                    <option value="">아직미정</option>
+                    <option value="">조회수등</option>
+                </select>
+                <button id="write_btn">글쓰기</button>
+            </div>
         </div>
+
+
+        <!-- 본문 -->
+        <!-- 지역 선택창 -->
+        <div class="cities-wrap">
+            <div id="superBox">
+
+                <div class="allCities">
+                    <button id="allCityBtn">전체</button>
+                </div>
+                <div class="superCity">
+                    <button class="cityBtn" id="Seoul">서울</button>
+                    <button class="cityBtn" id="Busan">부산</button>
+                    <button class="cityBtn" id="Daegu">대구</button>
+                    <button class="cityBtn" id="Incheon">인천</button>
+                    <button class="cityBtn" id="Gwangju">광주</button>
+                    <button class="cityBtn" id="Dajeon">대전</button>
+                    <button class="cityBtn" id="Ulsan">울산</button>
+                    <button class="cityBtn" id="Sejong">세종</button>
+                    <button class="cityBtn" id="Gyeonggi">경기</button>
+                    <button class="cityBtn" id="Gangwon">강원</button>
+                    <button class="cityBtn" id="Chungbuk">충북</button>
+                    <button class="cityBtn" id="Chungnam">충남</button>
+                    <button class="cityBtn" id="Jeonbuk">전북</button>
+                    <button class="cityBtn" id="Jeonnam">전남</button>
+                    <button class="cityBtn" id="Gyeongbuk">경북</button>
+                    <button class="cityBtn" id="Gyeongnam">경남</button>
+                    <button class="cityBtn" id="Jeju">제주</button>
+                </div>
+            </div>
+            <div id="subBox">
+                <!-- 군/구 체크박스가 출력될 자리 -->
+                <!-- <span><input type="checkbox">${}</span> -->
+            </div>
+        </div>
+
+        <!-- 본문 지도 불러오기 창-->
+        <div id="mapDisplay">
+            <!-- <div id="info">지도앱</div>
+            <div id="myposition">내위치</div>
+            <div id="keywordSearch">
+                <div class="inner-keyword-search">
+                    <input type="text" id="keyword">
+                    <button id="searchBtn">검색</button>
+                </div>
+            </div> -->
+            <div id="map"></div>
+        </div>
+
+        <!-- 지도 아래 게시판 -->
+        <div class="mapBoard">
+            <div class="mapBoard_container">
+                <div class="col uppermost">no</div>
+                <div class="col uppermost">제목</div>
+                <div class="col uppermost">작성자</div>
+                <div class="col uppermost">작성일</div>
+                <div class="col uppermost">조회수</div>
+
+                <div class="col">1</div>
+                <div class="col">울산 신정동 베이킹 클래스 다녀왔어요~~</div>
+                <div class="col">두또리야</div>
+                <div class="col">22.01.30</div>
+                <div class="col">552</div>
+
+                <div class="col">2</div>
+                <div class="col">울산 신정동 베이킹 클래스 다녀왔어요~~</div>
+                <div class="col">두또리야</div>
+                <div class="col">22.01.30</div>
+                <div class="col">552</div>
+
+                <div class="col">3</div>
+                <div class="col">울산 신정동 베이킹 클래스 다녀왔어요~~</div>
+                <div class="col">두또리야</div>
+                <div class="col">22.01.30</div>
+                <div class="col">552</div>
+
+                <div class="col">4</div>
+                <div class="col">울산 신정동 베이킹 클래스 다녀왔어요~~</div>
+                <div class="col">두또리야</div>
+                <div class="col">22.01.30</div>
+                <div class="col">552</div>
+
+                <div class="col">5</div>
+                <div class="col">울산 신정동 베이킹 클래스 다녀왔어요~~</div>
+                <div class="col">두또리야</div>
+                <div class="col">22.01.30</div>
+                <div class="col">552</div>
+
+                <div class="col">6</div>
+                <div class="col">울산 신정동 베이킹 클래스 다녀왔어요~~</div>
+                <div class="col">두또리야</div>
+                <div class="col">22.01.30</div>
+                <div class="col">552</div>
+
+                <div class="col">7</div>
+                <div class="col">울산 신정동 베이킹 클래스 다녀왔어요~~</div>
+                <div class="col">두또리야</div>
+                <div class="col">22.01.30</div>
+                <div class="col">552</div>
+
+                <div class="col">8</div>
+                <div class="col">울산 신정동 베이킹 클래스 다녀왔어요~~</div>
+                <div class="col">두또리야</div>
+                <div class="col">22.01.30</div>
+                <div class="col">552</div>
+
+                <div class="col">9</div>
+                <div class="col">울산 신정동 베이킹 클래스 다녀왔어요~~</div>
+                <div class="col">두또리야</div>
+                <div class="col">22.01.30</div>
+                <div class="col">552</div>
+
+                <div class="col last">10</div>
+                <div class="col last">울산 신정동 베이킹 클래스 다녀왔어요~~</div>
+                <div class="col last">두또리야</div>
+                <div class="col last">22.01.30</div>
+                <div class="col last">552</div>
+            </div>
+        </div>
+
+        <!-- 페이징 -->
+        <!-- <div class="boardPaging">
+                <div class="pageNo_wrap">
+                    <span class="pageNo">1</span>
+                    <span class="pageNo">2</span>
+                    <span class="pageNo">3</span>
+                </div>
+            </div> -->
+    </div>
+
+
+
+    </div>
+</main>
+
+<!-- 게시판 최하단. 게시글 검색, 기타 등등 -->
+<div id="post_search_bar">
+    <form action="">
+        <select name="post_filter" id="post_filter">
+            <option value="title">제목</option>
+            <option value="author">작성자</option>
+            <option value="mixed">제목+내용</option>
+        </select>
+        <input type="text" name="scan_post" id="scan_post"><button id="post_search_btn">검색</button>
     </form>
 </div>
 
-<script>
-        // 버튼은 바로 리스너 달아도 괜찮은가? 일단 예시로 울산 타겟팅.
-        const $Ulsan = document.getElementById('Ulsan');
-        $Ulsan.addEventListener('click', ulsan_f);
+<!-- 하단 -->
+<footer>
+    <ul class="menu">
+        <li>개인정보취급방침</li>
+        <li>|</li>
+        <li>회원약관</li>
+        <li>|</li>
+        <li>공정위확인</li>
+        <li>|</li>
+        <li>쇼핑몰 고객센터</li>
+        <li>|</li>
+        <li>000-111-2222</li>
+    </ul>
+</footer>
 
-        // 대분류에서 울산을 선택하는 경우의 함수.
-        function ulsan_f(e){
-            console.log('이벤트 발생 확인');
+<script src="mapJS.js" defer></script>
 
-            const url = '/map';
-            fetch(url, {method: 'GET'}).then(res => res.json())
-                                       .then(data => {
-                                           const exAll = document.createElement('input');
-                                           exAll.setAttribute('type', 'checkbox');
-                                        //    울산을 전체의 의미로 일단 써본다;
-                                           exAll.textContent = $Ulsan.textContent;
-                                       })
-                                       .then(res => {console.log(res);})
-                                       .catch(err => {console.error('Err:', err)} );
-
-                                       console.log('after fetch');
-        }
-
-    </script>
 </body>
+
 </html>
