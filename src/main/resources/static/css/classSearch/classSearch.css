@@ -1,3 +1,4 @@
+@charset "utf-8";
 
 *{
     font-family: 'Jua', sans-serif;
@@ -129,6 +130,7 @@
 
    /* 지역 찾기 상자 */
    .cities-wrap{
+    box-sizing: border-box;
     display: flex;
     height: 30%;
     margin: 10px 20px 0 20px;
@@ -138,7 +140,7 @@
    #superBox{
      border: 1px solid black;
      box-sizing: border-box;
-     width: 20%; height: 100%;
+     width: 15%; height: 100%;
 
      display: flex;
      flex-direction: column;
@@ -147,6 +149,7 @@
    /* 지역 선택 및 버튼 테두리 감추기 */
    .allCities{ height: 10%; padding-top: 10px;}
    .allCities > button { padding: 0; border: none; width: 50%; font-size: 14pt;}
+   .allCities > button:hover { color: #f37335  ; }
 
    .superCity{
      height: 90%;
@@ -155,47 +158,26 @@
      grid-template-columns: 1fr 1fr;
    }
    .superCity > button{ padding: 0; border: none; font-size: 14pt; }
+   .superCity > button:hover { color: #f37335 ; }
+
 
    /* 시군구(하위) 상자 */
    #subBox{
     border: 1px solid black;
     padding: 10px;
-    width: 80%;
+    width: 85%;
     font-size: 18px;
+    box-sizing: border-box;
 
-    overflow: scroll;
+    overflow: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* 갭을 주면 내용물이 상자의 패딩선을 넘어버리는데 오버플로우가 제 역할을 못하고 있다 */
+    /* gap: 20px; */
+
    }
    /* 시군구 선택 */
-
-
-
-
-
-
-
-   /* .sub_cities{
-     width: inherit;
-     text-align: center;
- }
-
- .cities{
-     display: flex;
-     justify-content: space-evenly;
- }
- .cities > span{
-     margin-bottom: 10px;
-     width: 30%;
- } */
-
-   /* .cityRow{
-    display: flex;
-    justify-content: space-evenly;
-   }
-
-   .cityRow > span{
-    margin-bottom: 10px;
-    width: 30%;
-   } */
 
 
    /* 지도 */

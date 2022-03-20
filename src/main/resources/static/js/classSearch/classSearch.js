@@ -1,4 +1,5 @@
-
+'use strict';
+//네이버, 카카오 지도 API 사용 로직.
 
     // 지도생성시 초기 옵션 주기
     var mapOptions = {
@@ -44,74 +45,44 @@
     });
 
 
-    // 내위치
-    const $myposition = document.getElementById('myposition');
-    $myposition.addEventListener('click', myposition_f );
+    //============================== 키워드 검색 =========================================
 
-    function myposition_f(e){
-      //alert('hi'+e);
-      if(window.navigator.geolocation){
-        window.navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    // 1) 시군구 체크박스에 리스너를 달아 검색 함수를 실행. 체크박스 class와 name은 'subChk'.
+    // 체크박스는 '만들어지기 전엔' 존재하지 않는다. 이벤트 위임 필요.
+    subBox.addEventListener('change', getChks_f);
+
+    // 2) 체크박스 체크 여부에 따른 키워드를 문자열로 읽어낸다.
+    function getChks_f(){
+      const query = 'input[name="subChk"]:checked';
+      const chkBoxes = document.querySelectorAll(query);
+
+      let keyword = '';
+      chkBoxes.forEach(ele => {
+        keyword += ele.value+' ';
+      });
+      // console.log(keyword);
+
+      // 3) 추출한 키워드를 카카오api 검색함수에 매개값으로 넣고 돌림
+      // 카카오 지도api는 여러 개의 검색어가 겹치면 먹통이 된다. 본질적 문제로 라디오 버튼 사용.
+      const ps = new kakao.maps.services.Places();
+
+      if( keyword.includes('전체') ){
+        ps.keywordSearch( keyword.substring(0,2)+'베이킹 클래스', placesSearchCB);
       }else{
-        window.alert('현재 브라우저는 위치정보를 제고하지 않습니다!');
+        ps.keywordSearch( keyword+'베이킹 클래스', placesSearchCB);
       }
     }
 
-    function onSuccess(position) {
-      const location = new naver.maps.LatLng(position.coords.latitude,
-                                          position.coords.longitude);
+    // 대한민국 전체 범위 검색
+    allCityBtn.addEventListener('click', searchAll_f);
 
-      map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
-      map.setZoom(10); // 지도의 줌 레벨을 변경합니다.
-
-      infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
-      infowindow.open(map, location);
-
-      console.log('Coordinates: ' + location.toString());
-    }
-
-    function onError(err) {
-      const center = map.getCenter();
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-      infowindow.setContent(
-        `<div style="padding:20px;">
-          <h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>
-            latitude: ${center.lat()} <br/>
-            longitude: ${center.lng()}
-        </div>`
-      );
-
-      infowindow.open(map, center);
+    function searchAll_f(){
+      const ps = new kakao.maps.services.Places();
+      ps.keywordSearch('베이킹 클래스', placesSearchCB);
     }
 
 
-    const $keyword = document.getElementById('keyword');
-    const $searchBtn = document.getElementById('searchBtn');
-
-    $keyword.addEventListener('keydown',searchKeyword);
-    $searchBtn.addEventListener('click',searchKeyword);
-
-    function searchKeyword(e){
-      const tagName = e.target.tagName;
-      switch(tagName){
-        case 'INPUT':
-          if(e.key == 'Enter'){
-            const ps = new kakao.maps.services.Places();
-            // 키워드로 장소를 검색합니다
-            ps.keywordSearch($keyword.value, placesSearchCB);
-          }
-          break;
-        case 'BUTTON':
-            const ps = new kakao.maps.services.Places();
-            // 키워드로 장소를 검색합니다
-            ps.keywordSearch($keyword.value, placesSearchCB);
-          break;
-        default:
-          console.log('etc..');
-      }
-    }
-
-        // 마커생성하기
+    // 마커생성하기
     // parameter : 위도, 경도
     function makeMarker(lat,lng){
 
@@ -153,7 +124,7 @@
     const markers=[];
     const infos=[];
 
-    // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+    // 키워드 검색 완료 시 호출되는 콜백함수
     function placesSearchCB (data, status, pagination) {
 
       // console.log(data);
@@ -227,10 +198,10 @@
 
             break;
         case kakao.maps.services.Status.ZERO_RESULT  : //정상적으로 응답 받았으나 검색 결과는 없음
-          alert('정상적으로 응답 받았으나 검색 결과는 없음');
+          alert('검색 결과가 없습니다.');
           break;
         case kakao.maps.services.Status.ERROR   : //서버 응답에 문제가 있는 경우
-          alert('서버 응답에 문제가 있는 경우');
+          alert('서버 응답에 문제가 있습니다.');
           break;
         default:
         alert('기타');

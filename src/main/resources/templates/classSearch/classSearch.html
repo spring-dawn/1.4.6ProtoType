@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/d4b88f7572.js" crossorigin="anonymous"></script>
 
-    <!-- css파일을 여러 개 적용할 때 위에서 아래 순서상 늦게 적용된 css의 우선순위가 높다 -->
-    <!-- <link rel="stylesheet" href="map.css"> -->
-    <link rel="stylesheet" href="/css/mapView.css">
+    <!-- 외부 css파일을 여러 개 적용할 때 코드 순서상 가장 아래에 적용된 css의 우선순위가 높다 -->
+    <link rel="stylesheet" href="" th:href="@{/css/classSearch/classSearch.css}">
 
     <!-- 구글 폰트 Jua 적용  -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-    <!-- JS파일 연결 -->
-    <script defer src="/220228 개인작업 시작/220308 map_v3/cityAjax_v3.js"></script>
-    <title>클래스찾기 화면_2차수정_Grid게시판</title>
+    <title>베이킹 클래스 게시판</title>
 
-    <!-- 네이버, 카카오 지도 API  -->
+    <!-- 외부 JS파일 연결, 화면이 로딩 된 후 적용 -->
+    <script defer src="" th:src="@{/js/classSearch/classSearch_ajax.js}"></script>
+    <script defer src="" th:src="@{/js/classSearch/classSearch.js}"></script>
+
+    <!-- 네이버, 카카오 지도 API. 기기가 달라지면 플랫폼 별도 추가 필요 -->
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=0y3jm6bdzz"></script>
     <script type="text/javascript"
@@ -29,7 +31,7 @@
 <body>
 <header>
     <!-- 로고 -->
-    <div class="logo"><img src="/img/logo.jpg" alt="" width="150px" height="100px"></div>
+    <div class="logo"><img src="" th:src="@{/img/logo.jpg}" alt="" width="150px" height="100px"></div>
     <!-- 상단 메뉴 -->
     <nav>
         <ul class="menu">
@@ -93,23 +95,23 @@
                     <button id="allCityBtn">전체</button>
                 </div>
                 <div class="superCity">
-                    <button class="cityBtn" id="Seoul">서울</button>
-                    <button class="cityBtn" id="Busan">부산</button>
-                    <button class="cityBtn" id="Daegu">대구</button>
-                    <button class="cityBtn" id="Incheon">인천</button>
-                    <button class="cityBtn" id="Gwangju">광주</button>
-                    <button class="cityBtn" id="Dajeon">대전</button>
-                    <button class="cityBtn" id="Ulsan">울산</button>
-                    <button class="cityBtn" id="Sejong">세종</button>
-                    <button class="cityBtn" id="Gyeonggi">경기</button>
-                    <button class="cityBtn" id="Gangwon">강원</button>
-                    <button class="cityBtn" id="Chungbuk">충북</button>
-                    <button class="cityBtn" id="Chungnam">충남</button>
-                    <button class="cityBtn" id="Jeonbuk">전북</button>
-                    <button class="cityBtn" id="Jeonnam">전남</button>
-                    <button class="cityBtn" id="Gyeongbuk">경북</button>
-                    <button class="cityBtn" id="Gyeongnam">경남</button>
-                    <button class="cityBtn" id="Jeju">제주</button>
+                    <button class="cityBtn" data-super-id="Seoul">서울</button>
+                    <button class="cityBtn" data-super-id="Busan">부산</button>
+                    <button class="cityBtn" data-super-id="Daegu">대구</button>
+                    <button class="cityBtn" data-super-id="Incheon">인천</button>
+                    <button class="cityBtn" data-super-id="Gwangju">광주</button>
+                    <button class="cityBtn" data-super-id="Dajeon">대전</button>
+                    <button class="cityBtn" data-super-id="Ulsan">울산</button>
+                    <button class="cityBtn" data-super-id="Sejong">세종</button>
+                    <button class="cityBtn" data-super-id="Gyeonggi">경기</button>
+                    <button class="cityBtn" data-super-id="Gangwon">강원</button>
+                    <button class="cityBtn" data-super-id="Chungbuk">충북</button>
+                    <button class="cityBtn" data-super-id="Chungnam">충남</button>
+                    <button class="cityBtn" data-super-id="Jeonbuk">전북</button>
+                    <button class="cityBtn" data-super-id="Jeonnam">전남</button>
+                    <button class="cityBtn" data-super-id="Gyeongbuk">경북</button>
+                    <button class="cityBtn" data-super-id="Gyeongnam">경남</button>
+                    <button class="cityBtn" data-super-id="Jeju">제주</button>
                 </div>
             </div>
             <div id="subBox">
@@ -244,8 +246,6 @@
     </ul>
 </footer>
 
-<script src="mapJS.js" defer></script>
 
 </body>
-
 </html>
