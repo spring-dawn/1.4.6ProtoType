@@ -366,7 +366,7 @@ function super_f(e){
     const url3 = 'http://192.168.168.103:9080';
     const url4 = 'http://192.168.0.171:9080';
 
-    fetch(url3,{
+    fetch(url4,{
         method:'GET',
     }).then(res => res.json())
       .then(res => console.log(res))
