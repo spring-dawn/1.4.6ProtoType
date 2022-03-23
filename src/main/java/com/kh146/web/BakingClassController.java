@@ -1,6 +1,5 @@
 package com.kh146.web;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,22 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/map")
 //@RequiredArgsConstructor
-public class ClassSearchController {
+public class BakingClassController {
 
 //    지도화면의 게시판 이용 처리가 대부분. 게시판 컨트롤러와 똑같이 작성한다
 
 //    뷰 매핑
     @GetMapping
-    public String classSearch(){
+    public String bakingClass(){
 
-        return "/classSearch/classSearch";
+        return "/bakingClass/bakingClass";
     }
 
 //    작성 양식
     @GetMapping("/add")
-    public String classSearchForm(){
+    public String bakingClassForm(){
 
-        return "/classSearch/classSearchForm";
+        return "/bakingClass/bakingClassForm";
     }
 
 
