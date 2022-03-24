@@ -228,6 +228,11 @@ create sequence uploadfile_uploadfile_id_seq nocache;
 
 commit;
 
+--댓글-대댓글 테이블 만들어야 하는데.
+
+
+
+
 select * from board;
 select * from member;
 select * from code;

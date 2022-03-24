@@ -1,11 +1,11 @@
-package com.kh146.domain.board.bakingClass;
+package com.kh146.domain.board;
 
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
-public class BakingClass {
+public class Bbs {
 //    베이킹 클래스 게시판에서 사용할 필드 정의
   private Long bbsId;
   private String bcategory;
