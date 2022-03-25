@@ -18,6 +18,8 @@ public class BbsSVCImpl implements BbsSVC{
 //  final 로 상수화 = 불변
   private final BbsDAO bbsDAO;
 
+//  추후 첨부파일 오버로딩 필요
+
   /**
    * 게시글 작성 > 등록
    * @param bbs
@@ -29,13 +31,16 @@ public class BbsSVCImpl implements BbsSVC{
   }
 
   /**
-   * 상세 조회
+   * 상세 조회, 조회수 +1
    * @param id
    * @return
    */
   @Override
-  public Bbs findBbsById(Long id) {
-    return bbsDAO.selectById(id);
+  public Bbs findById(Long id) {
+    Bbs foundItem = bbsDAO.selectById(id);
+    bbsDAO.increaseHit(id);
+
+    return foundItem;
   }
 
   /**
@@ -60,32 +65,24 @@ public class BbsSVCImpl implements BbsSVC{
   }
 
   /**
-   * 조회수 증가
-   * @param id
-   * @return
-   */
-  @Override
-  public int increaseHit(Long id) {
-    return bbsDAO.increaseHit(id);
-  }
-
-  /**
    * 카테고리별 게시판 
-   * @param category
+   * @param bcategory
    * @return
    */
   @Override
-  public List<Bbs> findBoard(String category) {
-    return bbsDAO.selectBoard(category);
+  public List<Bbs> findBoardByCategory(String bcategory) {
+    return bbsDAO.selectBoard(bcategory);
   }
 
   /**
-   * 게시판별 게시물 총 개수
-   * @param category
+   * 카테고리별 게시물 총 개수
+   * @param bcategory
    * @return
    */
   @Override
-  public int totalCount(String category) {
-    return bbsDAO.totalCount(category);
+  public int totalCount(String bcategory) {
+    return bbsDAO.totalCount(bcategory);
   }
+
+
 }

@@ -11,7 +11,7 @@ public interface BbsSVC {
   Long saveBbs(Bbs bbs);
 
   //  상세 조회
-  Bbs findBbsById(Long id);
+  Bbs findById(Long id);
 
   //  수정
   int updateById(Long id, Bbs bbs);
@@ -19,14 +19,11 @@ public interface BbsSVC {
   //  삭제
   int deleteById(Long id);
 
-//  조회수
- int increaseHit(Long id);
-
   //  전체 조회. 각 게시판 분류별 오버로딩.
-  List<Bbs> findBoard(String category);
+  List<Bbs> findBoardByCategory(String bcategory);
 
 //  답글은 없음.
 
   //게시판별 전체 게시물 수. 페이징 기능에 필요
-  int totalCount(String category);
+  int totalCount(String bcategory);
 }

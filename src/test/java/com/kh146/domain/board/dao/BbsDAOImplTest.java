@@ -1,4 +1,4 @@
-package com.kh146.domain.board.bakingClass.dao;
+package com.kh146.domain.board.dao;
 
 import com.kh146.domain.board.Bbs;
 import com.kh146.domain.board.dao.BbsDAO;
@@ -108,6 +108,29 @@ class BbsDAOImplTest {
     Assertions.assertThat(i).isEqualTo(2);
     log.info("i={}", i);
   }
+
+  @Test
+  @DisplayName("다수 게시글 등록")
+  void insertBbss() {
+//    샘플 데이터 넣기용. 카테고리별로 31개씩 만든다.
+    for(int i=0; i<31; i++) {
+//    새 게시글(빈 객체)을 만들고,
+      Bbs bbs = new Bbs();
+//    필요한 입력값을 채우고,
+      bbs.setBcategory("B0502");
+      bbs.setTitle("자유 게시판"+i);
+      bbs.setAuthorId("tester1");
+      bbs.setNickname("테스터1");
+      bbs.setBcontent("자유 게시판"+i);
+
+//    등록해.
+      bbsDAO.insertBbs(bbs);
+    }
+//    Assertions.assertThat(insertedId).isEqualTo(4);
+//    log.info("insertedId={}", insertedId);
+
+  }
+
 
 
 

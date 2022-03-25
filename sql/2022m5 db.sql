@@ -1,5 +1,4 @@
 --member, code, board, uploadfile 순으로 마지막에 commit. 반대 순서로 drop.
-
 drop table uploadfile;
 drop table board;
 drop table code;
@@ -199,21 +198,22 @@ select * from board;
 --첨부파일
 ---------
 create table uploadfile(
-    uploadfile_id   number(10),                 --파일아이디
-    code            varchar2(11),               --분류코드
-    rid             number,                     --참조번호(게시글번호등) = reference id. 뭘 참조하게 될지 알 수 없다는 건가.
-    store_filename  varchar2(50),               --서버보관 파일명
-    upload_filename varchar2(50),               --업로드 파일명(유저가 업로드한파일명)
-    fsize           varchar2(45),               --업로드 파일크기(단위byte)
-    ftype           varchar2(50),               --파일 유형(mimetype)
-    cdate           timestamp default systimestamp,      --등록일시
-    udate           timestamp default systimestamp       --수정일시
+    uploadfile_id   number(10),     --파일아이디
+    code            varchar2(11),   --분류코드
+    rid             number(10),     --참조번호(게시글번호등)
+    store_filename  varchar2(100),   --서버보관파일명
+    upload_filename varchar2(100),   --업로드파일명(유저가 업로드한파일명)
+    fsize           varchar2(45),   --업로드파일크기(단위byte)
+    ftype           varchar2(100),   --파일유형(mimetype)
+    cdate           timestamp default systimestamp, --등록일시
+    udate           timestamp default systimestamp  --수정일시
 );
-
 --기본키
 alter table uploadfile add constraint uploadfile_uploadfile_id_pk primary key(uploadfile_id);
+
 --외래키
-alter table uploadfile add constraint uploadfile_uploadfile_id_fk foreign key(code) references code(code_id);
+alter table uploadfile add constraint uploadfile_uploadfile_id_fk
+    foreign key(code) references code(code_id);
 
 --제약조건
 alter table uploadfile modify code constraint uploadfile_code_nn not null;
@@ -230,11 +230,8 @@ commit;
 
 --댓글-대댓글 테이블 만들어야 하는데.
 
-
-
-
-select * from board;
-select * from member;
-select * from code;
-select * from uploadfile;
+--select * from board;
+--select * from member;
+--select * from code;
+--select * from uploadfile;
 

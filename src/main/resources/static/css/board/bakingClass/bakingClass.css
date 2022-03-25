@@ -134,6 +134,7 @@
     display: flex;
     height: 30%;
     margin: 10px 20px 0 20px;
+    max-height: 325px;
    }
 
     /* 지역(상위) 상자 */
@@ -168,13 +169,12 @@
     width: 85%;
     font-size: 18px;
     box-sizing: border-box;
-
     overflow: auto;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
     /* 갭을 주면 내용물이 상자의 패딩선을 넘어버리는데 오버플로우가 제 역할을 못하고 있다 */
-    /* gap: 20px; */
 
    }
    /* 시군구 선택 */
