@@ -23,14 +23,9 @@ public class BoardController {
     //모든 게시판 아우르는 컨트롤러. 필요하다 코드 클래져파이.
     @ModelAttribute("classifier")
     public List<Code> classifier(){
-//        사용자가 입력하는=선택한 상위 코드를 읽어오는 방법은 없나? 하드코딩 말고.
-
-
-
-        return codeDAO.code("B01");
+//        13개 게시판 코드를 전부 반환
+        return codeDAO.code();
     }
-//    그런데 이렇게 쓰면 분야별 레시피 카테고리만 쓸 수 있다는 건데, 카테고리별로 컨트롤러를 만들어야 하나?
-
 
 
 //    작성 양식

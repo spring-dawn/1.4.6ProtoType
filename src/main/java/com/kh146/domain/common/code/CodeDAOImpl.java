@@ -39,6 +39,26 @@ public class CodeDAOImpl implements CodeDAO{
   }
 
   /**
+   * 상위 코드 > 하위 코드는 똑같은데 모든 일반 게시판 코드를 한 번에 반환.
+   * @return B0101~B0502까지의 모든 게시판 코드.
+   */
+  @Override
+  public List<Code> code() {
+    StringBuffer sql = new StringBuffer();
+    sql.append(" select t1.code_id code, t1.decode decode  ");
+    sql.append(" from code t1, code t2 ");
+    sql.append(" where t1.pcode_id = t2.code_id  ");
+    sql.append(" and t1.useyn = 'Y'  ");
+    sql.append(" and t1.pcode_id LIKE 'B%' ");
+
+    List<Code> codes = jdbcTemplate.query(
+            sql.toString(),
+            new BeanPropertyRowMapper<>(Code.class)
+    );
+    return codes;
+  }
+
+  /**
    * 모든 코드 반환
    * @return
    */

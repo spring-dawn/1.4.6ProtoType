@@ -27,6 +27,15 @@ class CodeDAOImplTest {
   }
 
   @Test
+  @DisplayName("일반 게시판 하위 코드 반환")
+  void code_board() {
+    List<Code> board = codeDAO.code();
+    Assertions.assertThat(board.size()).isEqualTo(13);
+
+    log.info("subCode={}", board);
+  }
+
+  @Test
   @DisplayName("모든 코드 반환")
   void codeAll() {
     List<CodeAll> codeAll = codeDAO.codeAll();
