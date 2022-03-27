@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/d4b88f7572.js" crossorigin="anonymous"></script>
 
     <!-- 외부 css파일을 여러 개 적용할 때 코드 순서상 가장 아래에 적용된 css의 우선순위가 높다 -->
-    <link rel="stylesheet" href="" th:href="@{/css/board/bakingClass/bakingClass.css}">
+    <link rel="stylesheet" href="/static/css/board/bakingClass/bakingClass.css" th:href="@{/css/board/bakingClass/bakingClass.css}">
 
     <!-- 구글 폰트 Jua 적용  -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -30,32 +30,64 @@
 </head>
 
 <body>
-<header>
-    <!-- 로고 -->
-    <div class="logo"><img src="" th:src="@{/img/logo.jpg}" alt="" width="150px" height="100px"></div>
-    <!-- 상단 메뉴 -->
-    <nav>
-        <ul class="menu">
-            <li>분야별 레시피</li>
-            <li>|</li>
-            <li>테마별 레시피</li>
-            <li>|</li>
-            <li>사진 팁</li>
-            <li>|</li>
-            <li>베이킹 클래스 찾기</li>
-            <li>|</li>
-            <li>커뮤니티</li>
-        </ul>
-    </nav>
-    <!-- 우측상단 아이콘 -->
-    <div class="icon">
-        <ul class="icon_ul">
-            <li><a href="#" class="searchBtn"><i class="fas fa-search"></i></a></li>
-            <li><i class="far fa-user"></i></li>
-            <li><i class="fas fa-bars"></i></li>
-        </ul>
-    </div>
-</header>
+    <header>
+        <!-- 로고 -->
+        <div class="logo"><img src="" th:src="@{/img/logo.jpg}" alt="" width="150px" height="100px"></div>
+
+        <!-- 상단 메뉴 -->
+        <div class="category">
+            <!-- 카테고리 구분, menu = depth1 -->
+            <ul class="menu">
+                <li class="pcode">분야별 레시피</li>
+                <li>|</li>
+                <li class="pcode">테마별 레시피</li>
+                <li>|</li>
+                <li class="pcode">사진 팁</li>
+                <li>|</li>
+                <li class="pcode">베이킹 클래스 찾기</li>
+                <li>|</li>
+                <li class="pcode">커뮤니티</li>
+            </ul>
+            <!-- 드롭다운 -->
+            <div class="dropdown-content">
+                <div class="depth2">
+                    <a href="#" class="ccode">제과</a>
+                    <a href="#" class="ccode">제빵</a>
+                    <a href="#" class="ccode">음료</a>
+                    <a href="#" class="ccode">노오븐 베이킹</a>
+                </div>
+                <div class="depth2">
+                    <a href="#" class="ccode">발렌타인 데이</a>
+                    <a href="#" class="ccode">할로윈</a>
+                    <a href="#" class="ccode">빼빼로 데이</a>
+                    <a href="#" class="ccode">크리스마스</a>
+                </div>
+                <div class="depth2">
+                    <a href="#" class="ccode">구도/각도</a>
+                    <a href="#" class="ccode">보정</a>
+                </div>
+                <div class="depth2">
+                    <a href="#" class="ccode">베이킹 클래스 찾기</a>
+                </div>
+                <div class="depth2">
+                    <a href="#" class="ccode">QnA</a>
+                    <a href="#" class="ccode">자유 게시판</a>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <!-- 우측상단 아이콘 -->
+        <div class="icon">
+            <ul class="icon_ul">
+                <li><a href="#" class="searchBtn"><i class="fas fa-search"></i></a></li>
+                <li><i class="far fa-user"></i></li>
+                <li><i class="fas fa-bars"></i></li>
+            </ul>
+        </div>
+
+    </header>
 
 <!-- 검색창 -->
 <div class="container_search">

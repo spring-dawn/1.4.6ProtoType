@@ -13,20 +13,7 @@
 
     <!--    폰트 적용인데 이거 css 파일로 뗄 수 없나? 될 것 같은데 -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-
-    <style>
-        /* 드롭다운 css */
-        /* .menu>.ccode .depth2 {
-            display: none;
-            font-size: 18px;
-        }
-
-        .menu>.ccode:hover .depth2 {
-            display: block;
-            position: absolute;
-            transition: all .5s ease-out;
-        } */
-    </style>
+   
 </head>
 
 <body>
@@ -35,17 +22,47 @@
         <div class="logo"><img src="" th:src="@{/img/logo.jpg}" alt="" width="150px" height="100px"></div>
 
         <!-- 상단 메뉴 -->
-        <ul class="menu">
-            <li class="pcode"><a href="#">분야별 레시피</a></li>
-            <li>|</li>
-            <li class="pcode"><a href="#">테마별 레시피</a></li>
-            <li>|</li>
-            <li class="pcode"><a href="#">사진 팁</a></li>
-            <li>|</li>
-            <li class="pcode"><a href="#">베이킹 클래스 찾기</a></li>
-            <li>|</li>
-            <li class="pcode"><a href="#">커뮤니티</a></li>
-        </ul>
+        <div class="category">
+            <!-- 카테고리 구분, menu = depth1 -->
+            <ul class="menu">
+                <li class="pcode">분야별 레시피</li>
+                <li>|</li>
+                <li class="pcode">테마별 레시피</li>
+                <li>|</li>
+                <li class="pcode">사진 팁</li>
+                <li>|</li>
+                <li class="pcode">베이킹 클래스 찾기</li>
+                <li>|</li>
+                <li class="pcode">커뮤니티</li>
+            </ul>
+            <!-- 드롭다운 -->
+            <div class="dropdown-content">
+                    <div class="depth2">
+                        <a href="#" class="ccode">제과</a>
+                        <a href="#" class="ccode">제빵</a>
+                        <a href="#" class="ccode">음료</a>
+                        <a href="#" class="ccode">노오븐 베이킹</a>
+                    </div>
+                    <div class="depth2">
+                        <a href="#" class="ccode">발렌타인 데이</a>
+                        <a href="#" class="ccode">할로윈</a>
+                        <a href="#" class="ccode">빼빼로 데이</a>
+                        <a href="#" class="ccode">크리스마스</a>
+                    </div>
+                    <div class="depth2">
+                        <a href="#" class="ccode">구도/각도</a>
+                        <a href="#" class="ccode">보정</a>
+                    </div>
+                    <div class="depth2">
+                        <a href="#" class="ccode">베이킹 클래스 찾기</a>
+                    </div>
+                    <div class="depth2">
+                        <a href="#" class="ccode">QnA</a>
+                        <a href="#" class="ccode">자유 게시판</a>
+                    </div>
+            </div>
+            
+        </div>
 
 
         <!-- 우측상단 아이콘 -->
@@ -56,37 +73,14 @@
                 <li><i class="fas fa-bars"></i></li>
             </ul>
         </div>
+
     </header>
 
-    <div class="dropdown">
-        <div class="depth2-wrap">
-            
-            <ul class="depth2">
-                <li class="ccode"><a href="#">제과</a></li>
-                <li class="ccode"><a href="#">제빵</a></li>
-                <li class="ccode"><a href="#">음료</a></li>
-                <li class="ccode"><a href="#">노오븐 베이킹</a></li>
-            </ul>
-            <ul class="depth2">
-                <li class="ccode"><a href="#">발렌타인 데이</a></li>
-                <li class="ccode"><a href="#">할로윈</a></li>
-                <li class="ccode"><a href="#">빼빼로 데이</a></li>
-                <li class="ccode"><a href="#">크리스마스</a></li>
-            </ul>
-            <ul class="depth2">
-                <li class="ccode"><a href="#">구도/각도</a></li>
-                <li class="ccode"><a href="#">보정</a></li>
-            </ul>
-            <ul class="depth2">
-                <li class="ccode"><a href="#">베이킹 클래스 찾기</a></li>
-            </ul>
-            <ul class="depth2">
-                <li class="ccode"><a href="#">QnA</a></li>
-                <li class="ccode"><a href="#">자유 게시판</a></li>
-            </ul>
-            
-        </div>>
-    </div>
+    <!-- 본문 -->
+    <main>
+
+    </main>
+
 
 
 </body>
