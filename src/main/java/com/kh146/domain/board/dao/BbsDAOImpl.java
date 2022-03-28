@@ -32,8 +32,8 @@ public class BbsDAOImpl implements BbsDAO {
   public Long insertBbs(Bbs bbs) {
 //    우선 sql문을 준비
     StringBuffer sql = new StringBuffer();
-    sql.append(" INSERT INTO board (bbs_id, bcategory, title, author_id, nickname, bcontent)  ");
-    sql.append("    VALUES ( BOARD_BBS_ID_SEQ.nextval, ?, ?, ?, ?, ? )  ");
+    sql.append(" INSERT INTO board (bbs_id, bcategory, title, author_id, nickname, bcontent ) ");
+    sql.append("    VALUES ( BOARD_BBS_ID_SEQ.nextval, ?, ?, ?, ?, ? ) ");
 
 //    시퀀스 id를 읽을 keyholder 와 프리페어드스테이먼트를 매개값으로.
     KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -147,42 +147,66 @@ public class BbsDAOImpl implements BbsDAO {
 
   }
 
-  //  /**
-//   * 게시판 목록
-//   * @return 카테고리 분류 없는 모든 게시물(이거 이 프로젝트엔 필요 없는 기능 같은데)
-//   */
-//  @Override
-//  public List<BakingClass> mapBoard() {
-//    return null;
-//  }
-
   /**
    * 게시판 목록
    * @param category 조회할 게시판 분류코드
    * @return 코드에 맞는 특정 게시판
    */
+//  @Override
+//  public List<Bbs> selectBoard(String category) {
+////    사용자가 선택한 분류의 게시판을 출력.
+//    StringBuffer sql = new StringBuffer();
+//    sql.append(" SELECT ");
+//    sql.append("     bbs_id, ");
+//    sql.append("     bcategory, ");
+//    sql.append("     title, ");
+//    sql.append("     author_id, ");
+//    sql.append("     nickname, ");
+//    sql.append("     hit, ");
+//    sql.append("     cdate ");
+//    sql.append(" FROM board ");
+//    sql.append(" where bcategory = ? ");
+//    sql.append(" order by bbs_id desc ");
+//
+////    리스트 출력, 다수 리턴이니 쿼리
+//    List<Bbs> foundBoard = jdbcTemplate.query(sql.toString(),
+//        new BeanPropertyRowMapper<>(Bbs.class),
+//        category);
+//
+//    return foundBoard;
+//  }
+
+  /**
+   * 카테고리별 페이징 적용된 게시판 출력
+   * @param bcategory 게시판 구분
+   * @param startRec 한 페이지의 시작 레코드(게시물)
+   * @param endRec 한 페이지의 마지막 레코드
+   * @return 게시판에 원하는 단위의 페이징 적용
+   */
   @Override
-  public List<Bbs> selectBoard(String category) {
-//    사용자가 선택한 분류의 게시판을 출력.
-    StringBuffer sql = new StringBuffer();
-    sql.append(" SELECT ");
-    sql.append("     bbs_id, ");
-    sql.append("     bcategory, ");
-    sql.append("     title, ");
-    sql.append("     author_id, ");
-    sql.append("     nickname, ");
-    sql.append("     hit, ");
-    sql.append("     cdate ");
-    sql.append(" FROM board ");
-    sql.append(" where bcategory = ? ");
-    sql.append(" order by bbs_id desc ");
+  public List<Bbs> selectBoard(String bcategory, int startRec, int endRec) {
 
-//    리스트 출력, 다수 리턴이니 쿼리
-    List<Bbs> foundBoard = jdbcTemplate.query(sql.toString(),
-        new BeanPropertyRowMapper<>(Bbs.class),
-        category);
+      StringBuffer sql = new StringBuffer();
+      sql.append(" select t1.* from( ");
+      sql.append("         SELECT ROW_NUMBER() OVER (ORDER BY bbs_id desc) no, ");
+      sql.append("         bbs_id, ");
+      sql.append("         bcategory, ");
+      sql.append("         title, ");
+      sql.append("         author_id, ");
+      sql.append("         nickname, ");
+      sql.append("         hit, ");
+      sql.append("         cdate ");
+      sql.append("         FROM ");
+      sql.append("         board ");
+      sql.append("         where bcategory = ? ) t1 ");
+      sql.append(" where t1.no between ? and ? ");
 
-    return foundBoard;
+    List<Bbs> list = jdbcTemplate.query(
+              sql.toString(),
+              new BeanPropertyRowMapper<>(Bbs.class),
+              bcategory, startRec, endRec
+      );
+      return list;
   }
 
   /**

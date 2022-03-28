@@ -39,7 +39,6 @@ public class BbsSVCImpl implements BbsSVC{
   public Bbs findById(Long id) {
     Bbs foundItem = bbsDAO.selectById(id);
     bbsDAO.increaseHit(id);
-
     return foundItem;
   }
 
@@ -69,9 +68,21 @@ public class BbsSVCImpl implements BbsSVC{
    * @param bcategory
    * @return
    */
+//  @Override
+//  public List<Bbs> findBoardByCategory(String bcategory) {
+//    return bbsDAO.selectBoard(bcategory);
+//  }
+
+  /**
+   * 페이징 적용된 카테고리별 게시판
+   * @param bcategory 분류 코드
+   * @param startRec 한 페이지 시작 레코드
+   * @param endRec 한 페이지 마지막 레코드
+   * @return
+   */
   @Override
-  public List<Bbs> findBoardByCategory(String bcategory) {
-    return bbsDAO.selectBoard(bcategory);
+  public List<Bbs> findBoardByCategory(String bcategory, int startRec, int endRec) {
+    return bbsDAO.selectBoard(bcategory, startRec, endRec);
   }
 
   /**

@@ -42,11 +42,14 @@ class BbsDAOImplTest {
   @DisplayName("게시글 조회")
   void findById(){
 //    조회할 게시물 id
-    Long bbsId = 2L;
+    Long bbsId = 32L;
     Bbs foundItem = bbsDAO.selectById(bbsId);
+//    조회수 증가
+    bbsDAO.increaseHit(bbsId);
 
     log.info("foundItem={}",foundItem);
     Assertions.assertThat(foundItem.getBbsId()).isEqualTo(bbsId);
+    Assertions.assertThat(foundItem.getHit()).isEqualTo(12);
 
   }
 
@@ -88,16 +91,16 @@ class BbsDAOImplTest {
     log.info("hit={}", bbsDAO.selectById(bbsId).getHit());
   }
 
-  @Test
-  @DisplayName("특정 카테고리 게시판 목록")
-  void selectBoard(){
-//    찾을 게시판 카테고리
-    String category = "B0401";  //베이킹클래스 게시판
-    List<Bbs> mapBoard = bbsDAO.selectBoard(category);
-
-    log.info("mapBoard={}", mapBoard);
-
-  }
+//  @Test
+//  @DisplayName("특정 카테고리 게시판 목록")
+//  void selectBoard(){
+////    찾을 게시판 카테고리
+//    String category = "B0401";  //베이킹클래스 게시판
+//    List<Bbs> mapBoard = bbsDAO.selectBoard(bcategory);
+//
+//    log.info("mapBoard={}", mapBoard);
+//
+//  }
 
   @Test
   @DisplayName("게시판별 총 게시물 개수")
@@ -130,6 +133,23 @@ class BbsDAOImplTest {
 //    log.info("insertedId={}", insertedId);
 
   }
+
+//  페이징 테스트
+  @Test
+  @DisplayName("특정 카테고리 게시판 목록")
+  void selectBoardWithPaging(){
+  //    찾을 게시판 카테고리
+    String bcategory = "B0401";  //베이킹클래스 게시판
+    int startRec = 1;
+    int endRec = 10;
+    List<Bbs> bbs = bbsDAO.selectBoard(bcategory, startRec, endRec);
+
+    log.info("bbs={}", bbs);
+
+  }
+
+
+
 
 
 

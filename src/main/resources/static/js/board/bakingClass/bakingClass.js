@@ -207,4 +207,22 @@
         alert('기타');
           break;
       }
+
+
+    //  글작성 버튼
+    writeBtn.addEventListener('click', e=>{
+      console.log("작성");
+      // 경로에 매개값이 없으면 문자열로 써도 된다
+      location.href = '/board/add';
+    });
+    
+
+
+
+
+
+
+
+
+
     }

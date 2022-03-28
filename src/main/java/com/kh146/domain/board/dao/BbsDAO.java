@@ -25,7 +25,8 @@ public interface BbsDAO {
 
 //  전체 조회. 각 게시판 분류별 오버로딩.
 //  List<BakingClass> mapBoard();
-  List<Bbs> selectBoard(String category);
+//  List<Bbs> selectBoard(String category);
+  List<Bbs> selectBoard(String bcategory,int startRec, int endRec);
 
 //  답글은 없음.
 
