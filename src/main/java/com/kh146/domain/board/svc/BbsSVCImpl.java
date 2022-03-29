@@ -68,10 +68,10 @@ public class BbsSVCImpl implements BbsSVC{
    * @param bcategory
    * @return
    */
-//  @Override
-//  public List<Bbs> findBoardByCategory(String bcategory) {
-//    return bbsDAO.selectBoard(bcategory);
-//  }
+  @Override
+  public List<Bbs> findBoardByCategory(String bcategory) {
+    return bbsDAO.selectBoard(bcategory);
+  }
 
   /**
    * 페이징 적용된 카테고리별 게시판

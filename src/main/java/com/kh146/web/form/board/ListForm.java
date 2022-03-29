@@ -2,6 +2,7 @@ package com.kh146.web.form.board;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -11,7 +12,7 @@ public class ListForm {
     private String title;                   //제목
 //    private String authorId;                //이메일
     private String nickname;                //별칭
-    private LocalDateTime cdate;            //생성일
+    private LocalDate cdate;            //생성일
     private int hit;                        //조회수
 
 }

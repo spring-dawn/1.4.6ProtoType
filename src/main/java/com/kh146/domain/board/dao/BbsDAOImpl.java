@@ -152,29 +152,29 @@ public class BbsDAOImpl implements BbsDAO {
    * @param category 조회할 게시판 분류코드
    * @return 코드에 맞는 특정 게시판
    */
-//  @Override
-//  public List<Bbs> selectBoard(String category) {
-////    사용자가 선택한 분류의 게시판을 출력.
-//    StringBuffer sql = new StringBuffer();
-//    sql.append(" SELECT ");
-//    sql.append("     bbs_id, ");
-//    sql.append("     bcategory, ");
-//    sql.append("     title, ");
-//    sql.append("     author_id, ");
-//    sql.append("     nickname, ");
-//    sql.append("     hit, ");
-//    sql.append("     cdate ");
-//    sql.append(" FROM board ");
-//    sql.append(" where bcategory = ? ");
-//    sql.append(" order by bbs_id desc ");
-//
-////    리스트 출력, 다수 리턴이니 쿼리
-//    List<Bbs> foundBoard = jdbcTemplate.query(sql.toString(),
-//        new BeanPropertyRowMapper<>(Bbs.class),
-//        category);
-//
-//    return foundBoard;
-//  }
+  @Override
+  public List<Bbs> selectBoard(String category) {
+//    사용자가 선택한 분류의 게시판을 출력.
+    StringBuffer sql = new StringBuffer();
+    sql.append(" SELECT ");
+    sql.append("     bbs_id, ");
+    sql.append("     bcategory, ");
+    sql.append("     title, ");
+    sql.append("     author_id, ");
+    sql.append("     nickname, ");
+    sql.append("     hit, ");
+    sql.append("     cdate ");
+    sql.append(" FROM board ");
+    sql.append(" where bcategory = ? ");
+    sql.append(" order by bbs_id desc ");
+
+//    리스트 출력, 다수 리턴이니 쿼리
+    List<Bbs> foundBoard = jdbcTemplate.query(sql.toString(),
+        new BeanPropertyRowMapper<>(Bbs.class),
+        category);
+
+    return foundBoard;
+  }
 
   /**
    * 카테고리별 페이징 적용된 게시판 출력
@@ -194,10 +194,9 @@ public class BbsDAOImpl implements BbsDAO {
       sql.append("         title, ");
       sql.append("         author_id, ");
       sql.append("         nickname, ");
-      sql.append("         hit, ");
-      sql.append("         cdate ");
-      sql.append("         FROM ");
-      sql.append("         board ");
+      sql.append("         cdate, ");
+      sql.append("         hit ");
+      sql.append("         FROM board  ");
       sql.append("         where bcategory = ? ) t1 ");
       sql.append(" where t1.no between ? and ? ");
 
@@ -210,7 +209,7 @@ public class BbsDAOImpl implements BbsDAO {
   }
 
   /**
-   * 페이징 용도
+   * 페이징 용도의 게시물 개수 셈
    * @return 각 게시판의 총 게시물 개수
    */
   @Override

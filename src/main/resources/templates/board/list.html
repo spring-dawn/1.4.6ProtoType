@@ -96,7 +96,7 @@
                 <th:block th:each=" item : ${list}">
                     <div class="col" th:text="${item.bbsId}">게시물 번호</div>
                     <a href="" class="col" th:text="${item.title}" th:href="@{|/board/${item.bbsId}/detail|}">제목</a>
-                    <div class="col" th:text="${item.nickname}">작성자ID/Nickname</div>
+                    <div class="col" th:text="${item.nickname}">작성자ID or Nickname</div>
                     <div class="col" th:text="${#temporals.format(item.cdate,'yy/MM/dd HH:dd')}">작성일</div>
                     <div class="col" th:text="${item.hit}">조회수</div>
                 </th:block>

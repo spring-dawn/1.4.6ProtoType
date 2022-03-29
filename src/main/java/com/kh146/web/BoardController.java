@@ -28,10 +28,16 @@ public class BoardController {
     private final BbsSVC bbsSVC;
     private final CodeDAO codeDAO;
 
-//    페이징 구현
+//    페이징 구현 (10, 10)
     @Autowired
     @Qualifier("pc10")
     private PageCriteria pc;
+
+//    페이징 구현 (9, 5)
+//    @Autowired
+//    @Qualifier("pc5")
+//    private PageCriteria pc5;
+
 
     //게시판 코드, 디코드 가져오기
     @ModelAttribute("classifier")
@@ -40,24 +46,52 @@ public class BoardController {
         return codeDAO.code();
     }
 
+//
+//    //페이징이 없는 카테고리별 전체 목록
+//    @GetMapping
+//    public String list(
+//            @RequestParam String bcategory,
+//            Model model) {
+//
+//        List<Bbs> list = bbsSVC.findBoardByCategory(bcategory);
+//
+//        List<ListForm> partOfList = new ArrayList<>();
+//        for (Bbs bbs : list) {
+//            ListForm listForm = new ListForm();
+//            BeanUtils.copyProperties(bbs, listForm);
+//            partOfList.add(listForm);
+//        }
+//        model.addAttribute("list", partOfList);
+//
+//        //      각각의 카테고리로 이동.
+//        if(bcategory.equals("B0401")){
+//            return "/board/bakingClass";
+//        }else if(bcategory.equals("B0501")){
+//            return "/board/QnA";
+//        }else if(bcategory.equals("B0502")){
+//            return "/board/free";
+//
+//        }else{
+//            return "/board/list";
+//        }
+//    }
 
-//    각 카테고리별 게시판으로 이동. 카테고리 매개값을 받아야만 한다.
+    //    각 카테고리별 게시판으로 이동. 카테고리 매개값을 받아야만 한다.
     @GetMapping("/{reqPage}")
     public String list(
             @PathVariable Integer reqPage,
             @RequestParam String bcategory,
             Model model
-            ){
+    ){
 
 //      1) 사용자 입력 - 요청 페이지
         pc.getRc().setReqPage(reqPage);
-
 //       2) 게시판 타입의 리스트 객체를 생성
         List<Bbs> list = null;
 
-//       3) 해당 게시판의 게시물 총 개수를 구하고 페이징 적용 메소드로 게시판 출력
+//       3) 해당 게시판의 게시물 총 개수를 구하고 페이징 적용 메소드로 게시판의 처음과 끝 페이지 출력
         pc.setTotalRec(bbsSVC.totalCount(bcategory));
-         list = bbsSVC.findBoardByCategory(bcategory, pc.getRc().getStartRec(), pc.getRc().getEndRec());
+        list = bbsSVC.findBoardByCategory(bcategory, pc.getRc().getStartRec(), pc.getRc().getEndRec());
 
 //       4)ListForm과 데이터를 대조해 복사
         List<ListForm> partOfList = new ArrayList<>();
@@ -82,6 +116,7 @@ public class BoardController {
         }
 
     }
+
 
 
 

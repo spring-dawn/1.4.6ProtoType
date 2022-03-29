@@ -116,15 +116,15 @@ class BbsDAOImplTest {
   @DisplayName("다수 게시글 등록")
   void insertBbss() {
 //    샘플 데이터 넣기용. 카테고리별로 31개씩 만든다.
-    for(int i=0; i<31; i++) {
+    for(int i=1; i<101; i++) {
 //    새 게시글(빈 객체)을 만들고,
       Bbs bbs = new Bbs();
 //    필요한 입력값을 채우고,
-      bbs.setBcategory("B0502");
-      bbs.setTitle("자유 게시판"+i);
+      bbs.setBcategory("B0401");
+      bbs.setTitle("베이킹 클래스"+i);
       bbs.setAuthorId("tester1");
       bbs.setNickname("테스터1");
-      bbs.setBcontent("자유 게시판"+i);
+      bbs.setBcontent("베이킹 클래스"+i);
 
 //    등록해.
       bbsDAO.insertBbs(bbs);
@@ -139,7 +139,7 @@ class BbsDAOImplTest {
   @DisplayName("특정 카테고리 게시판 목록")
   void selectBoardWithPaging(){
   //    찾을 게시판 카테고리
-    String bcategory = "B0401";  //베이킹클래스 게시판
+    String bcategory = "B0401";  //제과 게시판
     int startRec = 1;
     int endRec = 10;
     List<Bbs> bbs = bbsDAO.selectBoard(bcategory, startRec, endRec);

@@ -20,7 +20,7 @@ public interface BbsSVC {
   int deleteById(Long id);
 
   //  전체 조회. 각 게시판 분류별 오버로딩.
-//  List<Bbs> findBoardByCategory(String bcategory);
+  List<Bbs> findBoardByCategory(String bcategory);
   List<Bbs> findBoardByCategory(String bcategory, int startRec, int endRec);
 
 //  답글은 없음.

@@ -30,13 +30,13 @@ public class PagingConfig {
     }
 
     @Bean
-    public RecordCriteria rc5(){
+    public RecordCriteria rc9(){
         return new RecordCriteria(REC_COUNT_9_PER_PAGE);
     }
 
     @Bean
     public PageCriteria pc5(){
-        return new PageCriteria(rc10(), PAGE_COUNT_5_PER_PAGE);
+        return new PageCriteria(rc9(), PAGE_COUNT_5_PER_PAGE);
     }
 
 }

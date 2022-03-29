@@ -13,7 +13,7 @@ public class Bbs {
   private String authorId;
   private String nickname;
   private String bcontent;
-  private Long hit;
+  private int hit;
   private LocalDate cdate;
   private LocalDate udate;
 

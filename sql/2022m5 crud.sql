@@ -1,4 +1,4 @@
---board crud
++--board crud
 select * from board;
 select * from code;
 
@@ -49,7 +49,7 @@ SELECT
     udate
 FROM
     board
-where bbs_id = 32;     
+where bbs_id = 160;     
 
 --수정
 UPDATE board
