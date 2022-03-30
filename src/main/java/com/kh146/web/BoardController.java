@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -37,7 +38,6 @@ public class BoardController {
 //    @Autowired
 //    @Qualifier("pc5")
 //    private PageCriteria pc5;
-
 
     //게시판 코드, 디코드 가져오기
     @ModelAttribute("classifier")
@@ -79,13 +79,16 @@ public class BoardController {
     //    각 카테고리별 게시판으로 이동. 카테고리 매개값을 받아야만 한다.
     @GetMapping("/{reqPage}")
     public String list(
-            @PathVariable Integer reqPage,
-            @RequestParam String bcategory,
+        @PathVariable(required = false) Optional<Integer> reqPage,
+        @RequestParam String bcategory,
             Model model
     ){
+        //요청없으면 1
+        Integer page = reqPage.orElse(1);
+        String cate = getCategory(bcategory);
 
 //      1) 사용자 입력 - 요청 페이지
-        pc.getRc().setReqPage(reqPage);
+        pc.getRc().setReqPage(page);
 //       2) 게시판 타입의 리스트 객체를 생성
         List<Bbs> list = null;
 
@@ -102,6 +105,7 @@ public class BoardController {
         }
         model.addAttribute("list", partOfList);
         model.addAttribute("pc", pc);
+        model.addAttribute("bcategory", cate);
 
 //      각각의 카테고리로 이동.
         if(bcategory.equals("B0401")){
@@ -116,7 +120,12 @@ public class BoardController {
         }
 
     }
-
+    //쿼리스트링 카테고리 읽기, 없으면 ""반환. 어째... 좀... 내용이 쓰잘데기없다?
+    private String getCategory(String bcategory) {
+        String cate = bcategory;
+//        log.info("category={}", cate);
+        return cate;
+    }
 
 
 

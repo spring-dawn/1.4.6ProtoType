@@ -4,7 +4,7 @@ package com.kh146.domain.common.paging;
  * 한페이지에 보여줄 레코드 계산
  */
 public class RecordCriteria {
-    private int reqPage = 1;							//요청페이지
+    private Integer reqPage = 1;							//요청페이지
     private final int REC_COUNT_PER_PAGE; //한페이지에 보여줄 레코드수
     private int startRec;									//한페이지에 보여줄 시작레코드
     private int endRec;										//한페이지에 보여줄 종료레코드

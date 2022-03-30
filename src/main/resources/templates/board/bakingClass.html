@@ -176,8 +176,8 @@
             <div class="bbs-page">
                 <!--이전페이지정보-->
                 <th:block th:if="${pc.prev}">
-                  <a class="bbs-page-item" href="" th:href="@{/board/1}"><i class="fas fa-angle-double-left"></i></a>
-                  <a class="bbs-page-item" href="" th:href="@{/board/{reqPage}(reqPage=${pc.startPage-1})}"><i class="fas fa-angle-left"></i></a>
+                  <a class="bbs-page-item" href="" th:href="@{/board/1(bcategory=${param.bcategory})}"><i class="fas fa-angle-double-left"></i></a>
+                  <a class="bbs-page-item" href="" th:href="@{/board/{reqPage}(reqPage=${pc.startPage-1}, bcategory=${param.bcategory})}"><i class="fas fa-angle-left"></i></a>
                 </th:block>
   
                 <!--페이지표시-->
@@ -185,15 +185,15 @@
                   <th:block th:if="${pnum != 0}">
   <!--                  <a class="bbs-page-item" th:classappend="${pc.rc.reqPage == pnum} ? 'active'" href="" th:href="@{|/board/${pnum}|}" th:text="${pnum}">1</a>-->
                     <a class="bbs-page-item" th:classappend="${pc.rc.reqPage == pnum} ? 'active'" 
-                    href="" th:href="@{/board/{reqPage}(reqPage=${pnum})(bcategory=${param.bcategory})}" th:text="${pnum}">1</a>
+                    href="" th:href="@{/board/{reqPage}(reqPage=${pnum}, bcategory=${param.bcategory})}" th:text="${pnum}">1</a>
                   </th:block>
                 </th:block>
-                <!-- 왜 멀쩡한 int pnum 변수가 String으로 강제 형변환되는 거냐 -->
-  
+<!--                (bcategory=${param.bcategory})-->
+
                 <!--다음페이지정보-->
                 <th:block th:if="${pc.next}">
-                  <a class="bbs-page-item" href="" th:href="@{/board/{reqPage}(reqPage=${pc.endPage+1})}"><i class="fas fa-angle-right"></i></a>
-                  <a class="bbs-page-item" href="" th:href="@{/board/{reqPage}(reqPage=${pc.finalEndPage})}"><i class="fas fa-angle-double-right"></i></a>
+                  <a class="bbs-page-item" href="" th:href="@{/board/{reqPage}(reqPage=${pc.endPage+1}, bcategory=${param.bcategory})}"><i class="fas fa-angle-right"></i></a>
+                  <a class="bbs-page-item" href="" th:href="@{/board/{reqPage}(reqPage=${pc.finalEndPage}, bcategory=${param.bcategory})}"><i class="fas fa-angle-double-right"></i></a>
                 </th:block>
               </div>
         </div>

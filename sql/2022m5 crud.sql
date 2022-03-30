@@ -99,7 +99,7 @@ SELECT t1.code_id code, t1.decode decode
 FROM code t1, code t2
 where t1.pcode_id = t2.code_id   --여기까지가 모든 하위코드
 and t1.useyn = 'Y'
-and t1.pcode_id = 'B04';
+and t1.pcode_id = 'B01';
 
 --첨부파일 빼고 게시판 코드만 반환하는 게 필요하다. code, decode만. 
 SELECT t1.code_id code, t1.decode decode
