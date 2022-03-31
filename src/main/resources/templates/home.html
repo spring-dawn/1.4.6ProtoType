@@ -10,8 +10,12 @@
     <script src="https://kit.fontawesome.com/d4b88f7572.js" crossorigin="anonymous"></script>
     <!--    폰트 적용인데 이거 css 파일로 뗄 수 없나? 될 것 같은데 -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <!--    임시방편 css-->
-    <link rel="stylesheet" href="/static/css/board/home.css" th:href="@{/css/board/home.css}">
+   
+    <!-- Bootstrap CSS -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+   <!--    임시방편 css-->
+   <link rel="stylesheet" href="/static/css/board/home.css" th:href="@{/css/board/home.css}">
    
 </head>
 
@@ -37,29 +41,29 @@
             <!-- 드롭다운 -->
             <div class="dropdown-content">
                 <!-- 각 url에 /board/{reqPage}?{bcategory} -->
-                    <div class="depth2">
-                        <a href="#" th:href="@{/board/1?bcategory=B0101}" class="ccode">제과</a>
-                        <a href="#" th:href="@{/board/1?bcategory=B0102}" class="ccode">제빵</a>
-                        <a href="#" th:href="@{/board/1?bcategory=B0103}" class="ccode">음료</a>
-                        <a href="#" th:href="@{/board/1?bcategory=B0104}" class="ccode">노오븐 베이킹</a>
-                    </div>
-                    <div class="depth2">
-                        <a href="#" th:href="@{/board/1?bcategory=B0201}" class="ccode">발렌타인 데이</a>
-                        <a href="#" th:href="@{/board/1?bcategory=B0202}" class="ccode">할로윈</a>
-                        <a href="#" th:href="@{/board/1?bcategory=B0203}" class="ccode">빼빼로 데이</a>
-                        <a href="#" th:href="@{/board/1?bcategory=B0204}" class="ccode">크리스마스</a>
-                    </div>
-                    <div class="depth2">
-                        <a href="#" th:href="@{/board/1?bcategory=B0301}" class="ccode">구도/각도</a>
-                        <a href="#" th:href="@{/board/1?bcategory=B0302}" class="ccode">보정</a>
-                    </div>
-                    <div class="depth2">
-                        <a href="#" th:href="@{/board/1?bcategory=B0401}" class="ccode">베이킹 클래스 찾기</a>
-                    </div>
-                    <div class="depth2">
-                        <a href="#" th:href="@{/board/1?bcategory=B0501}" class="ccode">QnA</a>
-                        <a href="#" th:href="@{/board/1?bcategory=B0502}" class="ccode">자유 게시판</a>
-                    </div>
+                        <div class="depth2">
+                            <a href="#" th:href="@{/board/1?bcategory=B0101}" class="ccode">제과</a>
+                            <a href="#" th:href="@{/board/1?bcategory=B0102}" class="ccode">제빵</a>
+                            <a href="#" th:href="@{/board/1?bcategory=B0103}" class="ccode">음료</a>
+                            <a href="#" th:href="@{/board/1?bcategory=B0104}" class="ccode">노오븐 베이킹</a>
+                        </div>
+                        <div class="depth2">
+                            <a href="#" th:href="@{/board/1?bcategory=B0201}" class="ccode">발렌타인 데이</a>
+                            <a href="#" th:href="@{/board/1?bcategory=B0202}" class="ccode">할로윈</a>
+                            <a href="#" th:href="@{/board/1?bcategory=B0203}" class="ccode">빼빼로 데이</a>
+                            <a href="#" th:href="@{/board/1?bcategory=B0204}" class="ccode">크리스마스</a>
+                        </div>
+                        <div class="depth2">
+                            <a href="#" th:href="@{/board/1?bcategory=B0301}" class="ccode">구도/각도</a>
+                            <a href="#" th:href="@{/board/1?bcategory=B0302}" class="ccode">보정</a>
+                        </div>
+                        <div class="depth2">
+                            <a href="#" th:href="@{/board/1?bcategory=B0401}" class="ccode">베이킹 클래스 찾기</a>
+                        </div>
+                        <div class="depth2">
+                            <a href="#" th:href="@{/board/1?bcategory=B0501}" class="ccode">QnA</a>
+                            <a href="#" th:href="@{/board/1?bcategory=B0502}" class="ccode">자유 게시판</a>
+                        </div>
             </div>
         </div>
 
@@ -73,14 +77,6 @@
         </div>
     </header>
 
-    <!-- 검색창 -->
-    <div class="container_search">
-        <div class="search">
-            <input class="search textbox" type="text">
-            <!-- placeholder="검색어를 입력하세요."> -->
-            <button class="search button">검색</button>
-        </div>
-    </div>
 
     <!-- 본문 -->
     <main>
@@ -113,7 +109,6 @@
             <li>000-111-2222</li>
         </ul>
     </footer>
-
 
 </body>
 

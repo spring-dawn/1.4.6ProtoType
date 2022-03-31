@@ -164,7 +164,7 @@
                     <!-- db내용을 ListForm 형식에 맞게 표시하는 데 타임리프 반복문 필요 -->
                     <th:block th:each=" item : ${list}">
                         <div class="col" th:text="${item.bbsId}">게시물 번호</div>
-                        <a href="" class="col" th:text="${item.title}" th:href="@{|/board/${item.bbsId}/detail|}">제목</a>
+                        <a href="" class="col" id="boardTitle" th:text="${item.title}" th:href="@{|/board/${item.bbsId}/detail|}">제목</a>
                         <div class="col" th:text="${item.nickname}">작성자ID or Nickname</div>
                         <div class="col" th:text="${#temporals.format(item.cdate,'yy/MM/dd HH:dd')}">작성일</div>
                         <div class="col" th:text="${item.hit}">조회수</div>
@@ -228,7 +228,16 @@
         </ul>
     </footer>
 
+    <script>
+        //  글작성 버튼
+    const $writeBtn = document.getElementById('writeBtn');
+    $writeBtn?.addEventListener('click', e=>{
+      // 경로에 매개값이 없으면 문자열로 써도 된다
+      location.href="/board/add";   // get /bbs/add
+    });
+    </script>
 
 </body>
+
 
 </html>

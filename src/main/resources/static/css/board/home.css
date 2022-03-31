@@ -1,10 +1,10 @@
 @charset "utf-8";
 
 *{
+  /* outline: red 1px solid; */
   font-family: 'Jua', sans-serif;
   padding: 0;
   margin: 0;
-  /* font-family: 'Gamja Flower', cursive; */
   color: #594440;
   background-color: #fcf8f4;
  }
@@ -45,16 +45,15 @@
       /* 숨기기 */
       display: none; 
       position: absolute;
-      z-index: 1;
+      z-index: 1000;
     
   }
   /* 펼치기 */
   .category:hover .dropdown-content { 
       transition: all .5s ease-out;
-      /* background-color: black; */
       width: 100%; height: inherit;
       display: block; 
-      transition: ease-in-out .5s;
+
       display: grid; 
       grid-template-columns: 1fr 1fr 0.75fr 1.3fr 0.65fr;
   }
@@ -66,7 +65,7 @@
       font-size: 20px;
       text-align: center; 
   }
-  /* 마우스 호버링 */
+  /* 마우스 호버링 컬러 */
   .dropdown-content > div > a:hover{ background-color: black; color: white; } 
     /* 우측 상단 아이콘 */
     .icon li{
@@ -99,10 +98,13 @@
     background-color: #e5d0b5;
    }
 
+   .carousel-item{ height: 300px; }
+
+
      /* m5 메인 박스 */
    main {
     height: 1400px;
-    width: 90%;
+    width: 80%;
     min-width: 1000px;
     margin: auto;
     margin-top: 100px;
