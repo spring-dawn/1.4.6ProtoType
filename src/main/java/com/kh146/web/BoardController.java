@@ -3,6 +3,7 @@ package com.kh146.web;
 import com.kh146.domain.board.Bbs;
 import com.kh146.domain.board.svc.BbsSVC;
 import com.kh146.domain.common.code.Code;
+import com.kh146.domain.common.code.CodeAll;
 import com.kh146.domain.common.code.CodeDAO;
 import com.kh146.domain.common.paging.PageCriteria;
 import com.kh146.web.form.board.DetailForm;
@@ -29,21 +30,44 @@ public class BoardController {
     private final BbsSVC bbsSVC;
     private final CodeDAO codeDAO;
 
-//    페이징 구현 (10, 10)
+//    페이징 구현 (10, 10) - 디폴트?
     @Autowired
     @Qualifier("pc10")
-    private PageCriteria pc;
+    private PageCriteria pc10;
 
 //    페이징 구현 (9, 5)
-//    @Autowired
-//    @Qualifier("pc5")
-//    private PageCriteria pc5;
+    @Autowired
+    @Qualifier("pc5")
+    private PageCriteria pc5;
 
-    //게시판 코드, 디코드 가져오기
+    //모든 하위 게시판 코드, 디코드 가져오기
     @ModelAttribute("classifier")
-    public List<Code> classifier(){
-//        13개 게시판 코드를 전부 반환
-        return codeDAO.code();
+    public List<CodeAll> classifier(){
+//        모든 일반 게시판의 상위-하위 코드를 반환
+        return codeDAO.codeAll();
+    }
+
+    //상위 코드별 하위 코드 각각 가져오기
+    @ModelAttribute("classifier2")
+    public List<Code> classifier2(String pcode){
+        pcode = "";
+        switch (pcode){
+            case "B01" :
+                return codeDAO.code("B01");
+            case "B02" :
+                return codeDAO.code("B02");
+            case "B03" :
+                return codeDAO.code("B03");
+            case "B04" :
+                return codeDAO.code("B04");
+            case "B05" :
+                return codeDAO.code("B05");
+            default:
+                break;
+        }
+
+//        상위 코드에 따른 하위 코드 반환
+        return codeDAO.code(pcode);
     }
 
 //
@@ -83,10 +107,35 @@ public class BoardController {
         @RequestParam String bcategory,
             Model model
     ){
-        //요청없으면 1
+//   페이징 기준에 맞춰 게시판 구성
+        makingBoard(reqPage, bcategory, model);
+
+//      각각의 카테고리로 이동.
+        if(bcategory.equals("B0401")){
+            return "/board/bakingClass";
+        }else if(bcategory.equals("B0501")){
+            return "/board/QnA";
+        }else if(bcategory.equals("B0502")){
+            return "/board/free";
+
+        }else{
+            return "/board/list";
+        }
+    }
+
+//    게시판 메소드 추출
+    private void makingBoard(Optional<Integer> reqPage, String bcategory, Model model) {
+//        페이징 (10, 10)/(9,5) 분기
+        PageCriteria pc = null;
+        if(bcategory.equals("B0401") || bcategory.equals("B0501") || bcategory.equals("B0502")){
+            pc = pc10;
+        }else{
+            pc = pc5;
+        }
+
+        //페이지 요청이 없으면 1페이지로.
         Integer page = reqPage.orElse(1);
         String cate = getCategory(bcategory);
-
 //      1) 사용자 입력 - 요청 페이지
         pc.getRc().setReqPage(page);
 //       2) 게시판 타입의 리스트 객체를 생성
@@ -106,20 +155,8 @@ public class BoardController {
         model.addAttribute("list", partOfList);
         model.addAttribute("pc", pc);
         model.addAttribute("bcategory", cate);
-
-//      각각의 카테고리로 이동.
-        if(bcategory.equals("B0401")){
-            return "/board/bakingClass";
-        }else if(bcategory.equals("B0501")){
-            return "/board/QnA";
-        }else if(bcategory.equals("B0502")){
-            return "/board/free";
-
-        }else{
-            return "/board/list";
-        }
-
     }
+
     //쿼리스트링 카테고리 읽기, 없으면 ""반환. 어째... 좀... 내용이 쓰잘데기없다?
     private String getCategory(String bcategory) {
         String cate = bcategory;

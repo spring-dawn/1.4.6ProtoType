@@ -201,6 +201,7 @@
     border: 1px solid black;
     padding: 10px;
     width: 85%;
+    max-height: 294px;
     font-size: 18px;
     box-sizing: border-box;
     overflow: auto;

@@ -1,7 +1,6 @@
 package com.kh146.domain.board.dao;
 
 import com.kh146.domain.board.Bbs;
-import com.kh146.domain.board.dao.BbsDAO;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -120,11 +119,11 @@ class BbsDAOImplTest {
 //    새 게시글(빈 객체)을 만들고,
       Bbs bbs = new Bbs();
 //    필요한 입력값을 채우고,
-      bbs.setBcategory("B0401");
-      bbs.setTitle("베이킹 클래스"+i);
+      bbs.setBcategory("B0101");
+      bbs.setTitle("제과"+i);
       bbs.setAuthorId("tester1");
       bbs.setNickname("테스터1");
-      bbs.setBcontent("베이킹 클래스"+i);
+      bbs.setBcontent("제과"+i);
 
 //    등록해.
       bbsDAO.insertBbs(bbs);
