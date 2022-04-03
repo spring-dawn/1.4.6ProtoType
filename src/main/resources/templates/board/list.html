@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="list.css" th:href="@{/css/board/list.css}">
+    <link rel="stylesheet" href="/static/css/board/list.css" th:href="@{/css/board/list.css}">
     <title>갤러리형 게시판</title>
 </head>
 
@@ -84,14 +84,14 @@
 </div>
 
 <main>
-    <!-- 왼쪽 카테고리 -->
-    <div id="leftCategory" >
-        <div id="leftCategory_title">[super]</div>
-        <ul class="leftCategory_ul">
-            <li class="leftCategory_li"><a href="" class="leftLi_a">제과</a></li>
-            <li class="leftCategory_li"><a href="" class="leftLi_a">제빵</a></li>
-            <li class="leftCategory_li"><a href="" class="leftLi_a">음료</a></li>
-            <li class="leftCategory_li"><a href="" class="leftLi_a">노오븐 베이킹</a></li>
+    <!-- 왼쪽 배너. 인덱스를 읽어서 카테고리 이름 하나만 가져올 수 있을 것 같은데?-->
+    <div id="leftCategory" th:each=" super : ${classifier}">
+        <div id="leftCategory_title" th:text="${super.pdecode}">분야별 레시피</div>
+        <ul class="leftCategory_ul" >
+            <li class="leftCategory_li"><a href="" class="leftLi_a" th:text="${super.cdecode}">제과</a></li>
+<!--            <li class="leftCategory_li"><a href="" class="leftLi_a">제빵</a></li>-->
+<!--            <li class="leftCategory_li"><a href="" class="leftLi_a">음료</a></li>-->
+<!--            <li class="leftCategory_li"><a href="" class="leftLi_a">노오븐 베이킹</a></li>-->
         </ul>
     </div>
     <!-- 본문 -->
@@ -103,7 +103,7 @@
             <div class="item"  th:each=" item : ${list}">
                 <div class="post">
                     <div class="img-wrap">
-                        <img  src="https://cdn.pixabay.com/photo/2016/07/01/19/43/pretzels-1491789_960_720.jpg" alt="">
+                        <a href="" th:href="@{|/board/${item.bbsId}/detail|}"><img src="https://cdn.pixabay.com/photo/2016/07/01/19/43/pretzels-1491789_960_720.jpg" alt=""></a>
                     </div>
                     <div class="caption">
                         <a href="" th:href="@{|/board/${item.bbsId}/detail|}" class="postTitle" th:text="${item.title}">제목</a>

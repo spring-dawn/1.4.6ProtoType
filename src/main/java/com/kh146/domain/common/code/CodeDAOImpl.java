@@ -75,4 +75,27 @@ public class CodeDAOImpl implements CodeDAO{
     );
     return codeAll;
   }
+
+  /**
+   * 상위코드를 필요한 만큼 분류, 그 아래 하위코드 반환
+   * @param pcode 접속하려는 페이지의 상위 분류
+   * @return 상위 분류, 하위 분류의 이름.
+   */
+  @Override
+  public List<CodeAll> codeAll(String pcode) {
+    StringBuffer sql = new StringBuffer();
+    sql.append(" select t1.pcode_id pcode, t2.decode pdecode, t1.code_id ccode, t1.decode cdecode ");
+    sql.append(" from code t1, code t2 ");
+    sql.append(" where t1.pcode_id=t2.code_id ");
+    sql.append(" and t1.useyn = 'Y' ");
+    sql.append(" and t1.pcode_id Like ?||'%' ");
+//    마지막 분류조건이 잘 동작할지 모르겠네;
+    List<CodeAll> leftBanner = jdbcTemplate.query(
+            sql.toString(),
+            new BeanPropertyRowMapper<>(CodeAll.class),
+            pcode
+    );
+
+    return leftBanner;
+  }
 }

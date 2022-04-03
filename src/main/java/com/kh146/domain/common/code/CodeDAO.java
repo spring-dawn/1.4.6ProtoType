@@ -11,5 +11,6 @@ public interface CodeDAO {
 
 //  모든 코드 정보 반환.
   List<CodeAll> codeAll();
+  List<CodeAll> codeAll(String pcode);
 
 }

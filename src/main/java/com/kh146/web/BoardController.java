@@ -47,27 +47,25 @@ public class BoardController {
         return codeDAO.codeAll();
     }
 
-    //상위 코드별 하위 코드 각각 가져오기
+    //상위 코드를 분류한 후 하위 코드 각각 가져오기
     @ModelAttribute("classifier2")
-    public List<Code> classifier2(String pcode){
-        pcode = "";
-        switch (pcode){
+    public List<CodeAll> classifier2(String pcode){
+        switch ("pcode"){
             case "B01" :
-                return codeDAO.code("B01");
+                return codeDAO.codeAll("B01");
             case "B02" :
-                return codeDAO.code("B02");
+                return codeDAO.codeAll("B02");
             case "B03" :
-                return codeDAO.code("B03");
+                return codeDAO.codeAll("B03");
             case "B04" :
-                return codeDAO.code("B04");
+                return codeDAO.codeAll("B04");
             case "B05" :
-                return codeDAO.code("B05");
+                return codeDAO.codeAll("B05");
             default:
                 break;
         }
-
-//        상위 코드에 따른 하위 코드 반환
-        return codeDAO.code(pcode);
+//        정해진 상위 코드에 따른 하위 코드 반환
+        return codeDAO.codeAll(pcode);
     }
 
 //
@@ -113,11 +111,8 @@ public class BoardController {
 //      각각의 카테고리로 이동.
         if(bcategory.equals("B0401")){
             return "/board/bakingClass";
-        }else if(bcategory.equals("B0501")){
-            return "/board/QnA";
-        }else if(bcategory.equals("B0502")){
-            return "/board/free";
-
+        }else if(bcategory.equals("B0501") || bcategory.equals("B0502")){
+            return "/board/commu";
         }else{
             return "/board/list";
         }

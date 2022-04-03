@@ -43,4 +43,15 @@ class CodeDAOImplTest {
 
   }
 
+  @Test
+  @DisplayName("필요한 만큼 분류된 상위, 하위 반환")
+  void SuperAndSub() {
+    String pcode = "B02";
+    List<CodeAll> all = codeDAO.codeAll(pcode);
+    log.info("all={}", all);
+
+  }
+
+
+
 }
