@@ -17,9 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -47,25 +45,87 @@ public class BoardController {
         return codeDAO.codeAll();
     }
 
-    //상위 코드를 분류한 후 하위 코드 각각 가져오기
-    @ModelAttribute("classifier2")
-    public List<CodeAll> classifier2(String pcode){
-        switch ("pcode"){
-            case "B01" :
-                return codeDAO.codeAll("B01");
-            case "B02" :
-                return codeDAO.codeAll("B02");
-            case "B03" :
-                return codeDAO.codeAll("B03");
-            case "B04" :
-                return codeDAO.codeAll("B04");
-            case "B05" :
-                return codeDAO.codeAll("B05");
+    //    게시판 소제목 걸기(자동 렌더링)
+    @ModelAttribute("bbsTitle")
+    public Map<String,String> bbsTitle(@RequestParam(required = false) String bcategory) {
+//        하위코드로부터 상위코드를 읽게 해서 pcode로 낼 수는 없을까?
+        String pcode = null;
+        switch (bcategory) {
+            case "B0101":
+            case "B0102":
+            case "B0103":
+            case "B0104":
+                pcode = "B01";
+                break;
+            case "B0201":
+            case "B0202":
+            case "B0203":
+            case "B0204":
+                pcode = "B02";
+                break;
+            case "B0301":
+            case "B0302":
+                pcode = "B03";
+                break;
+            case "B0401":
+                pcode = "B04";
+                break;
+            case "B0501":
+            case "B0502":
+                pcode = "B05";
+                break;
             default:
                 break;
         }
-//        정해진 상위 코드에 따른 하위 코드 반환
-        return codeDAO.codeAll(pcode);
+        List<Code> codes = codeDAO.code(pcode);
+
+        Map<String, String> btitle = new HashMap<>();
+        for (Code code : codes) {
+            btitle.put(code.getCode(), code.getDecode());
+        }
+        return btitle;
+    }
+
+    //    왼쪽 배너 메뉴에 자동 렌더링
+    @ModelAttribute("leftBannerSub")
+    public List<Code> leftBannerSub(@RequestParam(required = false) String bcategory){
+//        페이지를 이동할 때 얻는 카테고리 매개값을 통해 pcode를 추출해서 메소드에 매개값으로 다시 넣는다
+        String pcode = null;
+        switch (bcategory) {
+            case "B0101":
+            case "B0102":
+            case "B0103":
+            case "B0104":
+                pcode = "B01";
+                break;
+            case "B0201":
+            case "B0202":
+            case "B0203":
+            case "B0204":
+                pcode = "B02";
+                break;
+            case "B0301":
+            case "B0302":
+                pcode = "B03";
+                break;
+            case "B0401":
+                pcode = "B04";
+                break;
+            case "B0501":
+            case "B0502":
+                pcode = "B05";
+                break;
+            default:
+                break;
+        }
+        return codeDAO.code(pcode);
+    }
+
+    //    왼쪽 배너 메뉴에 상위 코드명 자동 렌더링
+    @ModelAttribute("leftBannerSuper")
+    public List<Code> leftBannerSuper(@RequestParam(required = false) String bcategory){
+        String ccode = bcategory;
+        return codeDAO.codeSuper(ccode);
     }
 
 //

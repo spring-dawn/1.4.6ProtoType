@@ -36,6 +36,15 @@ class CodeDAOImplTest {
   }
 
   @Test
+  @DisplayName("일반 게시판 상위 코드 반환")
+  void supercode_board() {
+    String ccode = "B0302";
+    List<Code> pcode = codeDAO.codeSuper(ccode);
+
+    log.info("pcode={}", pcode);
+  }
+
+  @Test
   @DisplayName("모든 코드 반환")
   void codeAll() {
     List<CodeAll> codeAll = codeDAO.codeAll();

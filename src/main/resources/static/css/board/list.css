@@ -155,6 +155,7 @@
     padding-left: 20px;
     border-left: 4px solid #F37335;
     font-size: 35px;
+    max-height: 45px;
 }
 
 /* 게시물 */

@@ -136,10 +136,10 @@
    }
 
    #page_name{
-    margin-right: auto;
-    margin-left: 5px;
-    font-size: 25pt;
-    font-weight: bold;
+    margin-left: 10px;
+    padding-left: 20px;
+    border-left: 4px solid #F37335;
+    font-size: 35px;
    }
 
    /* 지도 화면의 경우 게시판이 맨아래에 있어 글쓰기 버튼도 하단으로 내릴 필요가 있어 보임   */

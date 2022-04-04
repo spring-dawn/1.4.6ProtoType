@@ -84,19 +84,18 @@
 </div>
 
 <main>
-    <!-- 왼쪽 배너. 인덱스를 읽어서 카테고리 이름 하나만 가져올 수 있을 것 같은데?-->
-    <div id="leftCategory" th:each=" super : ${classifier}">
-        <div id="leftCategory_title" th:text="${super.pdecode}">분야별 레시피</div>
+    <!-- 왼쪽 배너. 이자식 바인딩 거슬리네 정말-->
+    <div id="leftCategory" th:each=" superCode : ${leftBannerSuper}">
+        <div id="leftCategory_title" th:text="${superCode.decode}">[super]</div>
         <ul class="leftCategory_ul" >
-            <li class="leftCategory_li"><a href="" class="leftLi_a" th:text="${super.cdecode}">제과</a></li>
-<!--            <li class="leftCategory_li"><a href="" class="leftLi_a">제빵</a></li>-->
-<!--            <li class="leftCategory_li"><a href="" class="leftLi_a">음료</a></li>-->
-<!--            <li class="leftCategory_li"><a href="" class="leftLi_a">노오븐 베이킹</a></li>-->
+            <th:block th:each=" sub : ${leftBannerSub}">
+            <li class="leftCategory_li"><a href="" th:href="@{/board/1(bcategory=${sub.code})}" id="leftCategory_li" class="leftLi_a" th:text="${sub.decode}">[sub]</a></li>
+            </th:block>
         </ul>
     </div>
     <!-- 본문 -->
-    <div class="liLiWrap" >
-        <div class="liLiMenu" >[sub]</div>
+    <div class="liLiWrap">
+        <div class="liLiMenu" th:text="${bbsTitle['__${bcategory}__']}?:_">[sub]</div>
         <div class="liLiItems">
 
             <!-- start -->

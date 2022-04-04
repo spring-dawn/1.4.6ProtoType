@@ -8,6 +8,8 @@ public interface CodeDAO {
 //  like 연산자로 모든 게시판 코드를 출력하는 메소드 오버로딩
   List<Code> code(String pcode);
   List<Code> code();
+//  상위 코드 리턴
+  List<Code> codeSuper(String ccode);
 
 //  모든 코드 정보 반환.
   List<CodeAll> codeAll();

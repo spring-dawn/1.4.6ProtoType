@@ -136,7 +136,7 @@ from code
 where code_id in ( 
                 select pcode_id
                 from code
-                where code_id like 'B%'
+                where code_id like 'B0502'
 );
 --전체 게시판 코드 범위의 상위>하위 코드 반환
 select t1.pcode_id pcode, t2.decode pdecode, t1.code_id ccode, t1.decode cdecode

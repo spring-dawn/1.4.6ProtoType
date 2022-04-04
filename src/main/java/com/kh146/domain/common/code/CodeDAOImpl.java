@@ -77,6 +77,29 @@ public class CodeDAOImpl implements CodeDAO{
   }
 
   /**
+   * 렌더링 할 상위 카테고리명 추출
+   * @return 상위코드명
+   */
+  @Override
+  public List<Code> codeSuper(String ccode) {
+    StringBuffer sql = new StringBuffer();
+    sql.append(" select code_id code, decode decode");
+    sql.append(" from code ");
+    sql.append(" where code_id in ( ");
+    sql.append("                    select pcode_id ");
+    sql.append("                    from code ");
+    sql.append("                    where code_id like ?) ");
+
+    List<Code> superCode = jdbcTemplate.query(
+        sql.toString(),
+        new BeanPropertyRowMapper<>(Code.class),
+        ccode
+    );
+
+    return superCode;
+  }
+
+  /**
    * 상위코드를 필요한 만큼 분류, 그 아래 하위코드 반환
    * @param pcode 접속하려는 페이지의 상위 분류
    * @return 상위 분류, 하위 분류의 이름.

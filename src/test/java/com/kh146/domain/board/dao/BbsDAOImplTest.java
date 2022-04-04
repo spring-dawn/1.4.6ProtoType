@@ -119,11 +119,11 @@ class BbsDAOImplTest {
 //    새 게시글(빈 객체)을 만들고,
       Bbs bbs = new Bbs();
 //    필요한 입력값을 채우고,
-      bbs.setBcategory("B0101");
-      bbs.setTitle("제과"+i);
+      bbs.setBcategory("B0502");
+      bbs.setTitle("자유"+i);
       bbs.setAuthorId("tester1");
       bbs.setNickname("테스터1");
-      bbs.setBcontent("제과"+i);
+      bbs.setBcontent("자유"+i);
 
 //    등록해.
       bbsDAO.insertBbs(bbs);
