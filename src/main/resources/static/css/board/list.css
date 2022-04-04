@@ -75,11 +75,13 @@
         }
   
   /* 검색창 */
+.container_search{ min-width: 1400px;}
 .search{
     height: 40px;
     width: 25%;
     margin: 0 auto;
     display: flex;
+    
 }
 
 .search.textbox{
@@ -88,7 +90,6 @@
     text-align:start;
     font-size: 25px;
 }
-
 .search.button{
     height: 35px;
     width: 50px;
@@ -156,6 +157,17 @@
     border-left: 4px solid #F37335;
     font-size: 35px;
     max-height: 45px;
+}
+
+.upperBox{ 
+    display: flex;
+    justify-content: space-between;
+}
+.upperBox button{
+    height: 34px;
+    width: 104px;
+    margin: auto;
+    margin-right: 10px;
 }
 
 /* 게시물 */
@@ -266,6 +278,7 @@ main img{
   /* 게시글 검색 */
   #post_search_bar {
       width: 80%;
+      min-width: 1400px;
       margin: 30px auto 50px;
 
       display: flex;

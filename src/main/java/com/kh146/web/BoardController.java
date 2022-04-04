@@ -47,36 +47,10 @@ public class BoardController {
 
     //    게시판 소제목 걸기(자동 렌더링)
     @ModelAttribute("bbsTitle")
-    public Map<String,String> bbsTitle(@RequestParam(required = false) String bcategory) {
+    public Map<String,String> bbsTitle(@RequestParam(required = false) Optional<String> bcategory) {
 //        하위코드로부터 상위코드를 읽게 해서 pcode로 낼 수는 없을까?
         String pcode = null;
-        switch (bcategory) {
-            case "B0101":
-            case "B0102":
-            case "B0103":
-            case "B0104":
-                pcode = "B01";
-                break;
-            case "B0201":
-            case "B0202":
-            case "B0203":
-            case "B0204":
-                pcode = "B02";
-                break;
-            case "B0301":
-            case "B0302":
-                pcode = "B03";
-                break;
-            case "B0401":
-                pcode = "B04";
-                break;
-            case "B0501":
-            case "B0502":
-                pcode = "B05";
-                break;
-            default:
-                break;
-        }
+        pcode = getPcode(bcategory, pcode);
         List<Code> codes = codeDAO.code(pcode);
 
         Map<String, String> btitle = new HashMap<>();
@@ -85,13 +59,27 @@ public class BoardController {
         }
         return btitle;
     }
+    //    왼쪽 배너 메뉴에 상위 코드명 자동 렌더링
+    @ModelAttribute("leftBannerSuper")
+    public List<Code> leftBannerSuper(@RequestParam(required = false) Optional<String> bcategory){
+        String ccode = getCategory(bcategory);
+        return codeDAO.codeSuper(ccode);
+    }
 
     //    왼쪽 배너 메뉴에 자동 렌더링
     @ModelAttribute("leftBannerSub")
-    public List<Code> leftBannerSub(@RequestParam(required = false) String bcategory){
+    public List<Code> leftBannerSub(@RequestParam(required = false) Optional<String> bcategory){
 //        페이지를 이동할 때 얻는 카테고리 매개값을 통해 pcode를 추출해서 메소드에 매개값으로 다시 넣는다
         String pcode = null;
-        switch (bcategory) {
+        pcode = getPcode(bcategory, pcode);
+        return codeDAO.code(pcode);
+    }
+
+//    카테고리 파람으로 상위코드 역으로 읽는 스위치문 메소드
+    private String getPcode(Optional<String> bcategory, String pcode) {
+        String cate =getCategory(bcategory);
+
+        switch (cate) {
             case "B0101":
             case "B0102":
             case "B0103":
@@ -118,15 +106,11 @@ public class BoardController {
             default:
                 break;
         }
-        return codeDAO.code(pcode);
+        return pcode;
     }
 
-    //    왼쪽 배너 메뉴에 상위 코드명 자동 렌더링
-    @ModelAttribute("leftBannerSuper")
-    public List<Code> leftBannerSuper(@RequestParam(required = false) String bcategory){
-        String ccode = bcategory;
-        return codeDAO.codeSuper(ccode);
-    }
+
+
 
 //
 //    //페이징이 없는 카테고리별 전체 목록
@@ -190,7 +174,7 @@ public class BoardController {
 
         //페이지 요청이 없으면 1페이지로.
         Integer page = reqPage.orElse(1);
-        String cate = getCategory(bcategory);
+        String cate = getCategory(Optional.of(bcategory));
 //      1) 사용자 입력 - 요청 페이지
         pc.getRc().setReqPage(page);
 //       2) 게시판 타입의 리스트 객체를 생성
@@ -212,14 +196,8 @@ public class BoardController {
         model.addAttribute("bcategory", cate);
     }
 
-    //쿼리스트링 카테고리 읽기, 없으면 ""반환. 어째... 좀... 내용이 쓰잘데기없다?
-    private String getCategory(String bcategory) {
-        String cate = bcategory;
-//        log.info("category={}", cate);
-        return cate;
-    }
 
-
+//==================================== 구분선 =============================================
 
 //  공통 CRUD
 //    작성 양식
@@ -241,12 +219,17 @@ public class BoardController {
     @GetMapping("/{id}/detail")
     public String detailForm(
             @PathVariable Long id,
+            @RequestParam(required = false) Optional<String> bcategory,
             Model model
     ){
+//        이게 되네..... 코드 개드러워...
+        String cate = getCategory(bcategory);
+
         Bbs detailBbs = bbsSVC.findById(id);
         DetailForm detailForm = new DetailForm();
         BeanUtils.copyProperties(detailBbs, detailForm);
         model.addAttribute("detailForm", detailForm);
+        model.addAttribute("bcategory", cate);
 
         return "/board/detailForm";
     }
@@ -274,6 +257,13 @@ public class BoardController {
     }
 
 
+
+    //쿼리스트링 카테고리 읽기, 없으면 ""반환
+    private String getCategory(Optional<String> bcategory) {
+        String cate = bcategory.isPresent()? bcategory.get():"";
+        log.info("category={}", cate);
+        return cate;
+    }
 
 
 

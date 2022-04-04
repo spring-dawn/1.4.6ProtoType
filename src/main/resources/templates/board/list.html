@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    외부 라이브러리 임포트-->
     <script src="https://kit.fontawesome.com/d4b88f7572.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+<!--    폰트-->
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-
+<!--    css 파일-->
     <link rel="stylesheet" href="/static/css/board/list.css" th:href="@{/css/board/list.css}">
+<!--    js 파일-->
+    <script defer src="" th:src="@{/js/board/list.js}"></script>
+
     <title>갤러리형 게시판</title>
 </head>
 
@@ -95,7 +95,11 @@
     </div>
     <!-- 본문 -->
     <div class="liLiWrap">
-        <div class="liLiMenu" th:text="${bbsTitle['__${bcategory}__']}?:_">[sub]</div>
+        <div class="upperBox">
+            <div class="liLiMenu" th:text="${bbsTitle['__${bcategory}__']}?:_">[sub]</div>
+            <button type="button" id="writeBtn">글쓰기</button>
+        </div>
+
         <div class="liLiItems">
 
             <!-- start -->
@@ -143,7 +147,6 @@
                    th:text="${pnum}">1</a>
             </th:block>
         </th:block>
-        <!--                (bcategory=${param.bcategory})-->
 
         <!--다음페이지정보-->
         <th:block th:if="${pc.next}">
@@ -180,6 +183,15 @@
         <li>개인정보취급방침</li>
     </ul>
 </footer>
+
+<script>
+    const $writeBtn = document.getElementById('writeBtn');
+    $writeBtn?.addEventListener('click', e=>{
+        location.href = '/board/add';
+    });
+</script>
+
+
 </body>
 
 </html>
