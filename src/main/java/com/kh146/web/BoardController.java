@@ -51,6 +51,8 @@ public class BoardController {
 //        하위코드로부터 상위코드를 읽게 해서 pcode로 낼 수는 없을까?
         String pcode = null;
         pcode = getPcode(bcategory, pcode);
+
+        log.info("bbsTitle/pcode={}", pcode);
         List<Code> codes = codeDAO.code(pcode);
 
         Map<String, String> btitle = new HashMap<>();
@@ -77,7 +79,7 @@ public class BoardController {
 
 //    카테고리 파람으로 상위코드 역으로 읽는 스위치문 메소드
     private String getPcode(Optional<String> bcategory, String pcode) {
-        String cate =getCategory(bcategory);
+        String cate = getCategory(bcategory);
 
         switch (cate) {
             case "B0101":
@@ -112,7 +114,6 @@ public class BoardController {
 
 
 
-//
 //    //페이징이 없는 카테고리별 전체 목록
 //    @GetMapping
 //    public String list(
@@ -141,6 +142,8 @@ public class BoardController {
 //            return "/board/list";
 //        }
 //    }
+
+
 
     //    각 카테고리별 게시판으로 이동. 카테고리 매개값을 받아야만 한다.
     @GetMapping("/{reqPage}")
@@ -198,11 +201,16 @@ public class BoardController {
 
 
 //==================================== 구분선 =============================================
+//    매개값에 반드시 @RequestParam(required = false) Optional<String> bcategory를 넣고 getPcode()로 한 번 세탁..? 을 해줘야 한다.
 
 //  공통 CRUD
 //    작성 양식
     @GetMapping("/add")
-    public String addForm(){
+    public String addForm(
+        @RequestParam(required = false) Optional<String> bcategory,
+        Model model){
+        String cate = getCategory(bcategory);
+        model.addAttribute("bcategory", cate);
 
         return "/board/addForm";
     }
@@ -261,7 +269,7 @@ public class BoardController {
     //쿼리스트링 카테고리 읽기, 없으면 ""반환
     private String getCategory(Optional<String> bcategory) {
         String cate = bcategory.isPresent()? bcategory.get():"";
-        log.info("category={}", cate);
+//        log.info("category={}", cate);
         return cate;
     }
 

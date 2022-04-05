@@ -40,27 +40,27 @@
         <div class="dropdown-content">
             <!-- 각 url에 {reqPage}/{bcategory} -->
             <div class="depth2">
-                <a href="#" th:href="@{/board/1?bcategory=B0101}" class="ccode">제과</a>
-                <a href="#" th:href="@{/board/1?bcategory=B0102}" class="ccode">제빵</a>
-                <a href="#" th:href="@{/board/1?bcategory=B0103}" class="ccode">음료</a>
-                <a href="#" th:href="@{/board/1?bcategory=B0104}" class="ccode">노오븐 베이킹</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0101}" class="">제과</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0102}" class="">제빵</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0103}" class="">음료</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0104}" class="">노오븐 베이킹</a>
             </div>
             <div class="depth2">
-                <a href="#" th:href="@{/board/1?bcategory=B0201}" class="ccode">발렌타인 데이</a>
-                <a href="#" th:href="@{/board/1?bcategory=B0202}" class="ccode">할로윈</a>
-                <a href="#" th:href="@{/board/1?bcategory=B0203}" class="ccode">빼빼로 데이</a>
-                <a href="#" th:href="@{/board/1?bcategory=B0204}" class="ccode">크리스마스</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0201}" class="">발렌타인 데이</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0202}" class="">할로윈</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0203}" class="">빼빼로 데이</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0204}" class="">크리스마스</a>
             </div>
             <div class="depth2">
-                <a href="#" th:href="@{/board/1?bcategory=B0301}" class="ccode">구도/각도</a>
-                <a href="#" th:href="@{/board/1?bcategory=B0302}" class="ccode">보정</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0301}" class="">구도/각도</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0302}" class="">보정</a>
             </div>
             <div class="depth2">
-                <a href="#" th:href="@{/board/1?bcategory=B0401}" class="ccode">베이킹 클래스 찾기</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0401}" class="">베이킹 클래스 찾기</a>
             </div>
             <div class="depth2">
-                <a href="#" th:href="@{/board/1?bcategory=B0501}" class="ccode">QnA</a>
-                <a href="#" th:href="@{/board/1?bcategory=B0502}" class="ccode">자유 게시판</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0501}" class="">QnA</a>
+                <a href="#" th:href="@{/board/1?bcategory=B0502}" class="">자유 게시판</a>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
     </div>
 </div>
 
-<main>
+<main >
     <!-- 왼쪽 배너. 이자식 바인딩 거슬리네 정말-->
     <div id="leftCategory" th:each=" superCode : ${leftBannerSuper}">
         <div id="leftCategory_title" th:text="${superCode.decode}">[super]</div>

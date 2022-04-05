@@ -19,10 +19,10 @@ class CodeDAOImplTest {
   @Test
   @DisplayName("하위 코드 반환")
   void code() {
-    String pcode = "B01";
+    String pcode = "B03";
 
     List<Code> subCode = codeDAO.code(pcode);
-    Assertions.assertThat(subCode.size()).isEqualTo(4);
+    Assertions.assertThat(subCode.size()).isEqualTo(2);
     log.info("subCode={}", subCode);
   }
 

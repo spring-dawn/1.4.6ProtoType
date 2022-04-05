@@ -1,19 +1,259 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글작성</title>
+    <!--    외부 라이브러리 임포트-->
+    <script src="https://kit.fontawesome.com/d4b88f7572.js" crossorigin="anonymous"></script>
+    <!--    폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        * {
+            /* outline: red 1px solid; */
+            font-family: 'Jua', sans-serif;
+            padding: 0;
+            margin: 0;
+            color: #594440;
+            background-color: #fcf8f4;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        header {
+            height: 100px;
+            width: 80%;
+            min-width: 1300px;
+            margin: 15px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* 상단 메뉴, 아이콘 모양 */
+        .icon_ul,
+        .menu {
+            height: 100px;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu>li {
+            height: 2em;
+            margin: 8px 12px;
+            font-size: 25px;
+        }
+
+        /* 메뉴 박스 */
+        .category {
+            position: relative;
+        }
+
+        /* 드롭다운 구현 */
+        .dropdown-content {
+            /* 숨기기 */
+            display: none;
+            position: absolute;
+            z-index: 1000;
+
+        }
+
+        /* 펼치기 */
+        .category:hover .dropdown-content {
+            transition: all .5s ease-out;
+            /* background-color: black; */
+            width: 100%;
+            height: inherit;
+            display: block;
+            transition: ease-in-out .5s;
+            display: grid;
+            grid-template-columns: 1fr 1fr 0.75fr 1.3fr 0.65fr;
+        }
+
+        .depth2 {
+            display: flex;
+            flex-direction: column;
+            width: inherit;
+            height: 50px;
+            line-height: 50px;
+            margin: 0 auto;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        /* 마우스 호버링 컬러 */
+        .dropdown-content>div>a:hover {
+            background-color: black;
+            color: white;
+        }
+
+        /* 우측 상단 아이콘 */
+        .icon li {
+            margin: 8px 12px;
+            font-size: 30px;
+        }
+
+        /* 검색창 */
+        .container_search {
+            min-width: 1400px;
+        }
+
+        .search {
+            height: 40px;
+            width: 25%;
+            margin: 0 auto;
+            display: flex;
+
+        }
+
+        .search.textbox {
+            height: 30px;
+            width: 80%;
+            text-align: start;
+            font-size: 25px;
+        }
+
+        .search.button {
+            height: 35px;
+            width: 50px;
+            padding-left: 10px;
+            line-height: 35px;
+            font-size: 16px;
+        }
+
+        
+        .addform {
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        #form {
+            /* outline: red 1px solid; */
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+
+            width: 50%;
+        }
+
+        .btns {
+            justify-items: end;
+
+        }
+    </style>
 </head>
 
 <body>
-<h3>작성 양식</h3>
-<hr>
-<button id="saveBtn">등록</button>
-<button id="listBtn">목록</button>
+    <header>
+        <!-- 로고, 클릭하면 메인 화면으로 이동 -->
+        <a href="" th:href="@{/}" class="logo"><img src="" th:src="@{/img/logo.jpg}" alt="" width="150px"
+                height="100px"></a>
+        <!-- 상단 메뉴 -->
+        <div class="category">
+            <!-- 카테고리 구분, menu = depth1 -->
+            <ul class="menu">
+                <li class="pcode">분야별 레시피</li>
+                <li>|</li>
+                <li class="pcode">테마별 레시피</li>
+                <li>|</li>
+                <li class="pcode">사진 팁</li>
+                <li>|</li>
+                <li class="pcode">베이킹 클래스 찾기</li>
+                <li>|</li>
+                <li class="pcode">커뮤니티</li>
+            </ul>
+            <!-- 드롭다운 -->
+            <div class="dropdown-content">
+                <!-- 각 url에 {reqPage}/{bcategory} -->
+                <div class="depth2">
+                    <a href="#" th:href="@{/board/1?bcategory=B0101}" class="ccode">제과</a>
+                    <a href="#" th:href="@{/board/1?bcategory=B0102}" class="ccode">제빵</a>
+                    <a href="#" th:href="@{/board/1?bcategory=B0103}" class="ccode">음료</a>
+                    <a href="#" th:href="@{/board/1?bcategory=B0104}" class="ccode">노오븐 베이킹</a>
+                </div>
+                <div class="depth2">
+                    <a href="#" th:href="@{/board/1?bcategory=B0201}" class="ccode">발렌타인 데이</a>
+                    <a href="#" th:href="@{/board/1?bcategory=B0202}" class="ccode">할로윈</a>
+                    <a href="#" th:href="@{/board/1?bcategory=B0203}" class="ccode">빼빼로 데이</a>
+                    <a href="#" th:href="@{/board/1?bcategory=B0204}" class="ccode">크리스마스</a>
+                </div>
+                <div class="depth2">
+                    <a href="#" th:href="@{/board/1?bcategory=B0301}" class="ccode">구도/각도</a>
+                    <a href="#" th:href="@{/board/1?bcategory=B0302}" class="ccode">보정</a>
+                </div>
+                <div class="depth2">
+                    <a href="#" th:href="@{/board/1?bcategory=B0401}" class="ccode">베이킹 클래스 찾기</a>
+                </div>
+                <div class="depth2">
+                    <a href="#" th:href="@{/board/1?bcategory=B0501}" class="ccode">QnA</a>
+                    <a href="#" th:href="@{/board/1?bcategory=B0502}" class="ccode">자유 게시판</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 우측상단 아이콘 -->
+        <div class="icon">
+            <ul class="icon_ul">
+                <li><a href="#" class="searchBtn"><i class="fas fa-search"></i></a></li>
+                <li><i class="far fa-user"></i></li>
+                <li><i class="fas fa-bars"></i></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 검색창 -->
+    <div class="container_search">
+        <div class="search">
+            <input class="search textbox" type="text" placeholder="검색어를 입력하세요.">
+            <button class="search button">검색</button>
+        </div>
+    </div>
+
+
+    <main>
+        <div class="addform" th:data-code="${bcategory}">
+            <form action="" id="form" method="post">
+                <select name="" id="" class="w100">
+                    <option value="">==선택==</option>
+                    <option value="">게시판1</option>
+                </select>
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname">
+                <label for="content">본문</label>
+                <textarea name="" id="content" cols="30" rows="10"></textarea>
+            </form>
+            <div id="btns">
+                <button id="saveBtn">등록</button>
+                <button id="listBtn">목록</button>
+            </div>
+        </div>
+    </main>
+
+
+
+
+    <script>
+        // 카테고리 때문에 돌아가는 데 로직이 조금 달라진다 
+        const $addform = document.querySelector('.addform');
+        const bcategory = ($addform?.dataset.code) ? $addform.dataset.code : '';
+
+        //목록
+        const $listBtn = document.getElementById('listBtn');
+        $listBtn?.addEventListener("click", e => {
+            const url = `/board/1?bcategory=${bcategory}`;
+            location.href = url;
+        });
+
+
+    </script>
 
 
 </body>
+
 </html>
