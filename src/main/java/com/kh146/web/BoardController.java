@@ -52,7 +52,7 @@ public class BoardController {
         String pcode = null;
         pcode = getPcode(bcategory, pcode);
 
-        log.info("bbsTitle/pcode={}", pcode);
+//        log.info("bbsTitle/pcode={}", pcode);
         List<Code> codes = codeDAO.code(pcode);
 
         Map<String, String> btitle = new HashMap<>();
