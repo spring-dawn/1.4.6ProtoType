@@ -110,6 +110,14 @@ from category t1, category t2
 where t1.pcate_num=t2.cate_num
 and t1.useyn = 'Y';
 
+--상위코드 추출하기
+select cate_num, cate_name
+from category
+where cate_num in (
+                    select pcate_num
+                    from category
+                    where cate_num like '32');
+
 --페이징 쿼리
 select t1.* from(
     SELECT ROW_NUMBER() OVER (ORDER BY board_num desc) no,
@@ -124,7 +132,6 @@ select t1.* from(
         board
      where cate_code = 41 ) t1 
  where t1.no between 11 and 20; 
-
 
 
 

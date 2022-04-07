@@ -6,6 +6,7 @@ import com.kh146.domain.common.code.Code;
 import com.kh146.domain.common.code.CodeAll;
 import com.kh146.domain.common.code.CodeDAO;
 import com.kh146.domain.common.paging.PageCriteria;
+import com.kh146.web.form.board.AddForm;
 import com.kh146.web.form.board.DetailForm;
 import com.kh146.web.form.board.ListForm;
 import lombok.RequiredArgsConstructor;
@@ -143,8 +144,6 @@ public class BoardController {
 //        }
 //    }
 
-
-
     //    각 카테고리별 게시판으로 이동. 카테고리 매개값을 받아야만 한다.
     @GetMapping("/{reqPage}")
     public String list(
@@ -210,6 +209,11 @@ public class BoardController {
         @RequestParam(required = false) Optional<String> bcategory,
         Model model){
         String cate = getCategory(bcategory);
+//        log.info("/add    cate={}", cate);
+//        아직 로그인 회원 정보가 없으므로 임시로 폼 객체만 전달한다
+        AddForm addForm = new AddForm();
+
+        model.addAttribute("addForm", addForm);
         model.addAttribute("bcategory", cate);
 
         return "/board/addForm";

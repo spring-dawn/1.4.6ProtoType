@@ -110,7 +110,7 @@
                         <option value="">아직미정</option>
                         <option value="">조회수등</option>
                     </select>
-                    <button id="writeBtn">글쓰기</button>
+                    <button id="bakingClassWriteBtn">글쓰기</button>
                 </div>
             </div>
 
@@ -229,8 +229,8 @@
 
     <script>
         //  글작성 버튼
-    const $writeBtn = document.getElementById('writeBtn');
-    $writeBtn?.addEventListener('click', e=>{
+    const $bakingClassWriteBtn = document.getElementById('bakingClassWriteBtn');
+    $bakingClassWriteBtn?.addEventListener('click', e=>{
       // 경로에 매개값이 없으면 따옴표로 써도 된다
       location.href='/board/add';   
     });

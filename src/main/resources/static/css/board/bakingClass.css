@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 *{
+  outline: red 1px so;
   font-family: 'Jua', sans-serif;
   padding: 0;
   margin: 0;
@@ -149,7 +150,7 @@
     margin: auto;
    }
 
-   #writeBtn{
+   #bakingClassWriteBtn{
     height: 34px;
     width: 104px;
     margin: auto;
