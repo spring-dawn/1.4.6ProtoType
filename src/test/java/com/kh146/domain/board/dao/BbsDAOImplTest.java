@@ -119,11 +119,11 @@ class BbsDAOImplTest {
 //    새 게시글(빈 객체)을 만들고,
       Bbs bbs = new Bbs();
 //    필요한 입력값을 채우고,
-      bbs.setBcategory("B0204");
-      bbs.setTitle("크리스마스 레시피"+i);
+      bbs.setBcategory("B0103");
+      bbs.setTitle("초콜릿 음료 먹고 싶다"+i);
       bbs.setAuthorId("tester1");
       bbs.setNickname("테스터1");
-      bbs.setBcontent("부쉬드노엘 슈톨렌 아이싱쿠키 그런 거"+i);
+      bbs.setBcontent("인생은 쓰디쓴 초콜렛 참을 수 없는 초콜레엣"+i);
 
 //    등록해.
       bbsDAO.insertBbs(bbs);

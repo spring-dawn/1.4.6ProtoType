@@ -234,7 +234,6 @@ public class BoardController {
             @RequestParam(required = false) Optional<String> bcategory,
             Model model
     ){
-//        이게 되네..... 코드 개드러워...
         String cate = getCategory(bcategory);
 
         Bbs detailBbs = bbsSVC.findById(id);

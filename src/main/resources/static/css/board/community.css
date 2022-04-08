@@ -138,6 +138,8 @@
     border-bottom: solid 1px black;
     font-size: 18pt;
 }
+#leftCategory_li:hover{ color: #F37335; }
+
 .leftLi_a{ 
     line-height: 84px;
 }
