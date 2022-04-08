@@ -84,18 +84,19 @@
 
 <!-- main -->
 <main>
-    <!-- 왼쪽 배너. 이자식 바인딩 거슬리네 정말-->
-    <div id="leftCategory" >
-        <div id="leftCategory_title">[super]</div>
+    <!-- 왼쪽 배너. 그냥 th:if 쓰면 List 타입이어도 깔끔하게 바인딩 할 수 있는데 그 때는 몰랐다네 -->
+    <div id="leftCategory" th:each=" superCode : ${leftBannerSuper}">
+        <div id="leftCategory_title" th:text="${superCode.decode}">[super]</div>
         <ul class="leftCategory_ul" >
-            <th:block >
-                <li class="leftCategory_li"><a href=""  id="leftCategory_li" class="leftLi_a" >[sub]</a></li>
+            <th:block th:each=" sub : ${leftBannerSub}">
+                <li class="leftCategory_li"><a href="" th:href="@{/board/1(bcategory=${sub.code})}"
+                                               id="leftCategory_li" class="leftLi_a" th:text="${sub.decode}">[sub]</a></li>
             </th:block>
         </ul>
     </div>
     <!-- 본문 -->
     <div class="liLiWrap" >
-        <div class="liLiMenu" >[sub]</div>
+        <div class="liLiMenu" th:text="${bbsTitle['__${bcategory}__']}?:_">[sub]</div>
         <div class="liLiItems">
 
             <!-- start -->

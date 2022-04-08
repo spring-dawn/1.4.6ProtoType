@@ -159,13 +159,14 @@ main {
     border-bottom: solid 1px black;
     font-size: 18pt;
 }
+#leftCategory_li:hover{ color: #F37335; }
 
 .leftLi_a {
     line-height: 84px;
 }
 
 
-/* 본문 */
+/* main */
 .liLiWrap {
     width: 70%;
     margin-left: 100px;
@@ -179,6 +180,7 @@ main {
     font-size: 35px;
     max-height: 45px;
 }
+
 
 .upperBox {
     display: flex;
@@ -248,16 +250,17 @@ main img {
     font-weight: bold;
 }
 
-.bookmark {
+/* 관심리스트 설정/해제 체크박스 꾸미기  */
+.bookmark-container {
     margin-right: 10px;
     text-align: center;
 }
+input[type="checkbox"], .checked{display: none;}
+input[type="checkbox"]:checked~.checked{display: inline-block;}
+input[type="checkbox"]:checked~.unchecked{display: none;}
 
-input[type="checkbox"], #checked{ display: none;}
-input[type="checkbox"]:checked~#checked{ display: inline-block;}
-input[type="checkbox"]:checked~#unchecked{display: none;}
-
-#checked{color: red;}
+.checked{color: red;}
+/* checkbox end */
 
 .info {
     display: flex;

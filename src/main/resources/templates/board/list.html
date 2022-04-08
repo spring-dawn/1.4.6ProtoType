@@ -112,17 +112,14 @@
                                     src="https://cdn.pixabay.com/photo/2016/07/01/19/43/pretzels-1491789_960_720.jpg"
                                     alt=""></a>
                         </div>
-                        <div class="caption">
+                        <div class="caption" >
                             <a href="" th:href="@{|/board/${item.bbsId}/detail|}" class="postTitle"
                                 th:text="${item.title}">제목</a>
-
-                                    <label for="bookmark" class="bookmark">
-                                        <input type="checkbox" id="bookmark" >
-                                        <i class="fas fa-heart" id="unchecked"></i>
-                                        <i class="fas fa-heart" id="checked"></i>
-                                    </input>
-                                    </label>
-
+                            <!-- check -->
+                            <div class="bookmark-container">
+                                <!--                                관심(체크박스) 생성 위치-->
+                            </div>
+                            <!-- check end -->
                         </div>
                         <div class="info">
                             <span class="memId" th:text="${item.nickname}">By "회원명"</span>
