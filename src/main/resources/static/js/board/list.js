@@ -8,12 +8,12 @@ const bcategory = ($main?.dataset.bcategory) ? $main.dataset.bcategory : '';
 //작성 버튼
 const $recipeWriteBtn = document.getElementById('recipeWriteBtn');
 $recipeWriteBtn?.addEventListener('click', e => {
-    location.href = `/board/add?bcategory=${bcategory}`;
+  location.href = `/board/add?bcategory=${bcategory}`;
 });
 
 
 
-//관심리스트 설정/해제
+// 관심리스트 생성. 설정/해제=================================================
 // .bookmark-container(상위 태그=parent container)위치에 체크박스를 생성한다
 // 0) 상위 컨테이너 위치 타겟팅. 여기 아래로 추가할 것이다.
 const whereBookmark = document.querySelectorAll(".bookmark-container");
@@ -31,7 +31,6 @@ $label.setAttribute('class', 'bookmark');
 $likeList.setAttribute('type', 'checkbox');
 $likeList.setAttribute('class', 'likeList');
 $likeList.setAttribute('name', 'likeList');
-$likeList.setAttribute('th:data-id', '${item.bbsId}'); 
 
 $unchecked.setAttribute('class', 'fas fa-heart unchecked');
 $checked.setAttribute('class', 'fas fa-heart checked');
@@ -41,10 +40,10 @@ $label.appendChild($likeList);
 $label.appendChild($unchecked);
 $label.appendChild($checked);
 
-[...whereBookmark].forEach(ele=>ele.appendChild($label.cloneNode(true)));
+[...whereBookmark].forEach(ele => ele.appendChild($label.cloneNode(true)));
 
 
-// 체크가 읽히는지 확인해볼까? 일단은 이벤트리스너를 등록해야지;
+// 체크 여부에 따른 게시물 정보(시퀀스) 읽기======================================================
 // 1) 지도 만들 때처럼 체크박스가 생성되기 전엔 없다. 상위 컨테이너에 리스너를 위임 등록한다.
 const $bookmark = document.querySelectorAll('.likeList');
 $bookmark.forEach(ele => {
@@ -52,19 +51,31 @@ $bookmark.forEach(ele => {
   ele.addEventListener('change', isChecked_f);
 });
 
-function isChecked_f(e){
+// 이벤트 로직
+function isChecked_f(e) {
   // 이벤트가 먹히는지 확인
-  console.log(e);
-  // 체크 된 것만 읽어오기
+   console.log('체크');
+
+  // 체크 된 것에 한해 데이터 읽어오기.
+  // 1) 체크 여부
   const query = 'input[name="likeList"]:checked';
   const theChecked = document.querySelectorAll(query);
-  console.log(theChecked);
+  // console.log(theChecked);
 
-  // 체크된 곳의 dataset이 뭔지 읽어보자. 시퀀스값이 제대로 읽힐 것인가? 값은 int니까...?
-  // 서버 쪽 데이터를 읽으려면 우선 html에서 그 데이터가 심어진 곳을 타겟팅해야 한다
-  // const $dataBox = document.querySelectorAll('.likeList');
-  // const bbsIds = ($dataBox?.dataset.board)? $dataBox.dataset.board : '';
-  // console.log(bbsIds);
+  // 2) 체크 된 부분의 데이터를 읽는다
+  if(theChecked){
+    let ids = '';
+    [...whereBookmark].forEach(ele => {
+      ids += ele;
+    });
+    console.log(ids);
+    // 첫 번째거 단수론 읽어지는데 다수가 안 된다. 
+
+    
+
+  }
+
+
 
 }
 
