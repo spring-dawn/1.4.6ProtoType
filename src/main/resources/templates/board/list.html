@@ -116,7 +116,7 @@
                             <a href="" th:href="@{|/board/${item.bbsId}/detail|}" class="postTitle"
                                 th:text="${item.title}">제목</a>
                             <!-- check -->
-                            <div class="bookmark-container">
+                            <div class="bookmark-container" th:data-id="${item.bbsId}">
                                 <!--                                관심(체크박스) 생성 위치-->
                             </div>
                             <!-- check end -->
