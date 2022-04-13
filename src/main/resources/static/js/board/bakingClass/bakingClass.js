@@ -67,7 +67,8 @@
       const ps = new kakao.maps.services.Places();
 
       if( keyword.includes('전체') ){
-        ps.keywordSearch( keyword.substring(0,2)+'베이킹 클래스', placesSearchCB);
+        // 키워드 추출하고 이어 붙일 때 띄어쓰기 주의; 검색결과가 영향 받는 듯
+        ps.keywordSearch( keyword.substring(0,3)+'베이킹 클래스', placesSearchCB);
       }else{
         ps.keywordSearch( keyword+'베이킹 클래스', placesSearchCB);
       }

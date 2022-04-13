@@ -12,7 +12,7 @@
     <!--    css 파일-->
     <link rel="stylesheet" href="/static/css/board/list.css" th:href="@{/css/board/list.css}">
     <!--    js 파일-->
-    <script defer src="" th:src="@{/js/board/list.js}"></script>
+    <script defer src=""  th:src="@{/js/board/list.js}"></script>
 
     <title>갤러리형 게시판</title>
 </head>
@@ -112,12 +112,16 @@
                                     src="https://cdn.pixabay.com/photo/2016/07/01/19/43/pretzels-1491789_960_720.jpg"
                                     alt=""></a>
                         </div>
-                        <div class="caption" >
+                        <div class="caption">
                             <a href="" th:href="@{|/board/${item.bbsId}/detail|}" class="postTitle"
                                 th:text="${item.title}">제목</a>
                             <!-- check -->
-                            <div class="bookmark-container" th:data-id="${item.bbsId}">
-                                <!--                                관심(체크박스) 생성 위치-->
+                            <div class="bookmark-container">
+                                <label class="bookmark">
+                                    <input type="checkbox" class="likeList" name="likeList" th:data-id="${item.bbsId}" th:value="${item.bbsId}">
+                                    <i class="fas fa-heart unchecked"></i>
+                                    <i class="fas fa-heart checked"></i>
+                                </label>
                             </div>
                             <!-- check end -->
                         </div>
@@ -192,6 +196,8 @@
             <li>개인정보취급방침</li>
         </ul>
     </footer>
+
+   
 
 
 </body>
